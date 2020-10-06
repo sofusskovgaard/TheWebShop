@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 using TheWebShop.Data.Entities.Brand;
@@ -8,6 +9,7 @@ using TheWebShop.Data.Entities.ProductPicture;
 
 namespace TheWebShop.Data.Entities.Product
 {
+    [Table("Products")]
     public class ProductEntity : BaseEntity, IProductEntity
     {
         public string Name { get; set; }
