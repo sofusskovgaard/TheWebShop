@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using TheWebShop.Data.Entities;
-
-namespace TheWebShop.Data.EntityConfigurations
+namespace TheWebShop.Data.Entities
 {
     public class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : BaseEntity
     {
-        public void Configure(EntityTypeBuilder<TEntity> builder)
+        public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
             builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETDATE()");
             builder.Property(x => x.CreatedAt).ValueGeneratedOnAdd();
