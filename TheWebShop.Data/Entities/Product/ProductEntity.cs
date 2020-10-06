@@ -18,6 +18,7 @@ namespace TheWebShop.Data.Entities.Product
 
         public BrandEntity Brand { get; set; }
 
+        [Column("decimal(5,2)")]
         public double Price { get; set; }
 
         public ICollection<ProductPictureEntity> Pictures { get; set; }
