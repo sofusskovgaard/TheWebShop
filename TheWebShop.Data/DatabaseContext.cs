@@ -19,11 +19,11 @@ namespace TheWebShop.Data
     public class DatabaseContext : DbContext
     {
 
-        public DbSet<BrandEntity> BrandEntities { get; set; }
-        public DbSet<CategoryEntity> CategoryEntities { get; set; }
-        public DbSet<ProductEntity> ProductEntities { get; set; }
-        public DbSet<ProductCategoryEntity> ProductCategoryEntities { get; set; }
-        public DbSet<ProductPictureEntity> ProductPictureEntities { get; set; }
+        public DbSet<BrandEntity> Brands { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<ProductCategoryEntity> ProductCategories { get; set; }
+        public DbSet<ProductPictureEntity> ProductPictures { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
