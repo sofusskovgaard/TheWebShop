@@ -4,6 +4,8 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using TheWebShop.Data.Entities;
+
 namespace TheWebShop.Data
 {
     public class DatabaseContext : DbContext
@@ -20,6 +22,7 @@ namespace TheWebShop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<BaseEntity>();
         }
     }
 }
