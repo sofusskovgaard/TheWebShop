@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
+using System.Reflection;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -23,6 +25,31 @@ namespace TheWebShop.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
+
+            modelBuilder.ApplyConfigurations();
         }
+    }
+
+    public static class DatabaseContextExtensions
+    {
+        public static ModelBuilder ApplyConfigurations(this ModelBuilder modelBuilder)
+        {
+
+            var types = Assembly
+                .GetExecutingAssembly()
+                .GetTypes()
+                .Where(type => type
+                   .GetInterfaces()
+                   .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<BaseEntity>))
+                ).ToList();
+
+            foreach (var type in types)
+            {
+                dynamic configurationInstance = Activator.CreateInstance(type);
+                modelBuilder.ApplyConfiguration(configurationInstance);
+            }
+
+            return modelBuilder;
+        } 
     }
 }
