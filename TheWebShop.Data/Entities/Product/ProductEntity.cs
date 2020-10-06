@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 using TheWebShop.Data.Entities.Brand;
@@ -16,6 +17,7 @@ namespace TheWebShop.Data.Entities.Product
 
         public BrandEntity Brand { get; set; }
 
+        [Column("decimal(5,2)")]
         public double Price { get; set; }
 
         public ICollection<ProductPictureEntity> Pictures { get; set; }
