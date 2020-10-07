@@ -8,7 +8,7 @@ namespace TheWebShop.ConsoleApp
     {
         public void Run()
         {
-            Console.WriteLine("Welcome to Sjofus's Sjofle Tjobak");
+            Console.WriteLine("Welcome to Sjofus's Sjofle Tjobak Butjik");
         }
     }
 }

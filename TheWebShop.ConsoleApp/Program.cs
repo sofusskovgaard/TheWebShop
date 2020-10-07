@@ -2,6 +2,8 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
+using TheWebShop.Data;
+
 namespace TheWebShop.ConsoleApp
 {
     class Program
@@ -29,6 +31,8 @@ namespace TheWebShop.ConsoleApp
             var services = new ServiceCollection();
 
             // Configure services to inject.
+
+            services.AddTransient<DatabaseContextFactory>();
 
             services.AddSingleton<Application>();
 
