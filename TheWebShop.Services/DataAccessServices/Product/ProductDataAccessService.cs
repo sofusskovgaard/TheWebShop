@@ -24,8 +24,11 @@ namespace TheWebShop.Services.DataAccessServices.Product
         public override async Task<ProductEntity> GetById(int entityId)
         {
             var product = await _context.Products
-                              .AsNoTracking()
-                              .FirstOrDefaultAsync(x => x.EntityId == entityId);
+                .AsNoTracking()
+                .Include(x => x.Pictures)
+                .Include(x => x.Brand)
+                .Include(x => x.Reviews)
+                .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
             return product;
         }
@@ -34,6 +37,8 @@ namespace TheWebShop.Services.DataAccessServices.Product
         {
             var products = await _context.Products
                 .AsNoTracking()
+                .Include(x => x.Pictures)
+                .Include(x => x.Brand)
                 .FilterEntities(filter)
                 .OrderEntities(filter)
                 .PaginateEntities(filter)
@@ -74,7 +79,11 @@ namespace TheWebShop.Services.DataAccessServices.Product
         {
             try
             {
-                var product = await _context.Products.FirstOrDefaultAsync(x => x.EntityId == entityId);
+                var product = await _context.Products
+                    .Include(x => x.Pictures)
+                    .Include(x => x.Reviews)
+                    .Include(x => x.Categories)
+                    .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
