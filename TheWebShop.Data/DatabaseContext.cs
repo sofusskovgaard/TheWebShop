@@ -25,14 +25,8 @@ namespace TheWebShop.Data
         public DbSet<ProductCategoryEntity> ProductCategories { get; set; }
         public DbSet<ProductPictureEntity> ProductPictures { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=TheWebShop;User Id=sa;Password=P@ssw0rd;")
-            //.EnableSensitiveDataLogging(true)
-            .UseLoggerFactory(new ServiceCollection()
-            .AddLogging(builder => builder.AddConsole()
-                .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information))
-                .BuildServiceProvider().GetService<ILoggerFactory>());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
