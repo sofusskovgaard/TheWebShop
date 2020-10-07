@@ -3,6 +3,10 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using TheWebShop.Data;
+using TheWebShop.Services.DataAccessServices.Brand;
+using TheWebShop.Services.DataAccessServices.Category;
+using TheWebShop.Services.DataAccessServices.Product;
+using TheWebShop.Services.DataAccessServices.Review;
 
 namespace TheWebShop.ConsoleApp
 {
@@ -32,7 +36,13 @@ namespace TheWebShop.ConsoleApp
 
             // Configure services to inject.
 
-            services.AddTransient<DatabaseContextFactory>();
+            services.AddSingleton<DatabaseContextFactory>();
+
+            // Configure data access services
+            services.AddTransient<ProductDataAccessService>();
+            services.AddTransient<CategoryDataAccessService>();
+            services.AddTransient<BrandDataAccessService>();
+            services.AddTransient<ReviewDataAccessService>();
 
             services.AddSingleton<Application>();
 
