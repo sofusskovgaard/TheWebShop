@@ -13,6 +13,7 @@ using TheWebShop.Data.Entities.Category;
 using TheWebShop.Data.Entities.Product;
 using TheWebShop.Data.Entities.ProductCategory;
 using TheWebShop.Data.Entities.ProductPicture;
+using TheWebShop.Data.Entities.Review;
 
 namespace TheWebShop.Data
 {
@@ -22,6 +23,7 @@ namespace TheWebShop.Data
         public DbSet<BrandEntity> Brands { get; set; }
         public DbSet<CategoryEntity> Categories { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<ReviewEntity> Reviews { get; set; }
         public DbSet<ProductCategoryEntity> ProductCategories { get; set; }
         public DbSet<ProductPictureEntity> ProductPictures { get; set; }
 

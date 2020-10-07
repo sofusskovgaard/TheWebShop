@@ -5,6 +5,7 @@ using System.Text;
 using TheWebShop.Data.Entities.Brand;
 using TheWebShop.Data.Entities.ProductCategory;
 using TheWebShop.Data.Entities.ProductPicture;
+using TheWebShop.Data.Entities.Review;
 
 namespace TheWebShop.Data.Entities.Product
 {
@@ -21,5 +22,7 @@ namespace TheWebShop.Data.Entities.Product
         ICollection<ProductPictureEntity> Pictures { get; set; }
 
         ICollection<ProductCategoryEntity> Categories { get; set; }
+
+        ICollection<ReviewEntity> Reviews { get; set; }
     }
 }
