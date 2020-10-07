@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TheWebShop.Common\TheWebShop.Common.csproj" />
     <ProjectReference Include="..\TheWebShop.Data\TheWebShop.Data.csproj" />
   </ItemGroup>
 
