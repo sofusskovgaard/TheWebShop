@@ -6,9 +6,12 @@ namespace TheWebShop.Data.Entities.Review
     {
         int Rating { get; set; }
 
+        string Title { get; set; }
+
         string Comment { get; set; }
 
         int ProductEntityId { get; set; }
+
         ProductEntity Product { get; set; }
     }
 }
