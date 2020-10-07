@@ -46,4 +46,3 @@ namespace TheWebShop.Services.DataAccessServices.Brand
         }
     }
 }
-}
