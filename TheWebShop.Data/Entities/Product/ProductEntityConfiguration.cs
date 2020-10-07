@@ -24,6 +24,11 @@ namespace TheWebShop.Data.Entities.Product
                 .HasMany(x => x.Categories)
                 .WithOne(x => x.Product)
                 .HasForeignKey(x => x.ProductEntityId);
+
+            builder
+                .HasMany(x => x.Reviews)
+                .WithOne(x => x.Product)
+                .HasForeignKey(x => x.ProductEntityId);
         }
     }
 }
