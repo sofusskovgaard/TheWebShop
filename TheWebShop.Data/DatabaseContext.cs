@@ -17,6 +17,9 @@ using TheWebShop.Data.Entities.Review;
 
 namespace TheWebShop.Data
 {
+    /// <summary>
+    /// DbContext used to connect to the database.
+    /// </summary>
     public class DatabaseContext : DbContext, IDatabaseContext
     {
         public DbSet<BrandEntity> Brands { get; set; }
@@ -44,8 +47,16 @@ namespace TheWebShop.Data
         }
     }
 
+    /// <summary>
+    /// Custom extension methods for the <see cref="DatabaseContext" />
+    /// </summary>
     public static class DatabaseContextExtensions
     {
+        /// <summary>
+        /// Seed the database using the <see cref="ModelBuilder"/>.
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        /// <returns></returns>
         public static ModelBuilder SeedDatabase(this ModelBuilder modelBuilder)
         {
             #region Brands
