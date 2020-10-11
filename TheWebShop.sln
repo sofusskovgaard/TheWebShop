@@ -5,15 +5,17 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWebShop.ConsoleApp", "TheWebShop.ConsoleApp\TheWebShop.ConsoleApp.csproj", "{C1D4D7B7-2E6F-4C8B-AB2F-C22BA9FD36D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWebShop.Data", "TheWebShop.Data\TheWebShop.Data.csproj", "{FC50B6CE-63A4-47EA-885D-23B6B6657148}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWebShop.Data", "TheWebShop.Data\TheWebShop.Data.csproj", "{FC50B6CE-63A4-47EA-885D-23B6B6657148}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWebShop.Services", "TheWebShop.Services\TheWebShop.Services.csproj", "{AC867A0F-21BA-4DF7-8D68-5C119A73C96B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWebShop.Services", "TheWebShop.Services\TheWebShop.Services.csproj", "{AC867A0F-21BA-4DF7-8D68-5C119A73C96B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWebShop.Common", "TheWebShop.Common\TheWebShop.Common.csproj", "{82D4802E-20E7-4C56-9A56-271BBD9E0381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWebShop.Common", "TheWebShop.Common\TheWebShop.Common.csproj", "{82D4802E-20E7-4C56-9A56-271BBD9E0381}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{718550B2-9984-4A5D-8CB8-CD09FBC0198B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWebShop.Data.Test", "TheWebShop.Data.Test\TheWebShop.Data.Test.csproj", "{BE6042D6-3049-43F2-8458-5C22860F65E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWebShop.Data.Test", "TheWebShop.Data.Test\TheWebShop.Data.Test.csproj", "{BE6042D6-3049-43F2-8458-5C22860F65E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWebShop.Services.Test", "TheWebShop.Services.Test\TheWebShop.Services.Test.csproj", "{7721A855-7F4A-41DC-843B-B4FCC7EA1DC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,14 +43,19 @@ Global
 		{BE6042D6-3049-43F2-8458-5C22860F65E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE6042D6-3049-43F2-8458-5C22860F65E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE6042D6-3049-43F2-8458-5C22860F65E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7721A855-7F4A-41DC-843B-B4FCC7EA1DC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7721A855-7F4A-41DC-843B-B4FCC7EA1DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7721A855-7F4A-41DC-843B-B4FCC7EA1DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7721A855-7F4A-41DC-843B-B4FCC7EA1DC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {044A3150-C7BA-47D2-87AD-B3AEDAF84139}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BE6042D6-3049-43F2-8458-5C22860F65E2} = {718550B2-9984-4A5D-8CB8-CD09FBC0198B}
+		{7721A855-7F4A-41DC-843B-B4FCC7EA1DC9} = {718550B2-9984-4A5D-8CB8-CD09FBC0198B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {044A3150-C7BA-47D2-87AD-B3AEDAF84139}
 	EndGlobalSection
 EndGlobal

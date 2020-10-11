@@ -10,6 +10,10 @@ namespace TheWebShop.Data.Entities.Product
         {
             base.Configure(builder);
 
+            builder.Ignore(x => x.Rating);
+
+            builder.Ignore(x => x.RatingCount);
+
             builder
                 .HasOne(x => x.Brand)
                 .WithMany(x => x.Products)

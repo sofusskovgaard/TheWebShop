@@ -10,11 +10,11 @@ using TheWebShop.Data.Entities.Category;
 
 namespace TheWebShop.Services.DataAccessServices.Category
 {
-    public class CategoryDataAccessService : BaseDataAccessService<CategoryEntity, CategoryFilter, CategoryOrderBy>
+    public class CategoryDataAccessService : BaseDataAccessService<CategoryEntity, CategoryFilter, CategoryOrderBy>, ICategoryDataAccessService
     {
         private readonly DatabaseContext _context;
 
-        public CategoryDataAccessService(DatabaseContextFactory databaseContextFactory)
+        public CategoryDataAccessService(IDatabaseContextFactory databaseContextFactory)
         {
             this._context = databaseContextFactory.CreateDbContext(null);
         }
@@ -25,6 +25,7 @@ namespace TheWebShop.Services.DataAccessServices.Category
                 .AsNoTracking()
                 .Include(x => x.ChildCategories)
                 .Include(x => x.ParentCategory)
+                .Include(x => x.Products)
                 .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
             return category;
@@ -36,6 +37,7 @@ namespace TheWebShop.Services.DataAccessServices.Category
                 .AsNoTracking()
                 .Include(x => x.ChildCategories)
                 .Include(x => x.ParentCategory)
+                .Include(x => x.Products)
                 .FilterEntities(filter)
                 .OrderEntities(filter)
                 .PaginateEntities(filter)
@@ -70,6 +72,14 @@ namespace TheWebShop.Services.DataAccessServices.Category
             await _context.SaveChangesAsync();
 
             return category;
+        }
+
+        public override async Task<CategoryEntity> Create(CategoryEntity entity)
+        {
+            var entry = _context.Add(entity);
+            await _context.SaveChangesAsync();
+
+            return entry.Entity;
         }
 
         public override async Task<bool> DeleteById(int entityId)

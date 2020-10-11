@@ -10,6 +10,10 @@ namespace TheWebShop.Data.Entities.Brand
     {
         string Name { get; set; }
 
+        double Rating { get; }
+
+        int RatingCount { get; }
+
         ICollection<ProductEntity> Products { get; set; }
     }
 }

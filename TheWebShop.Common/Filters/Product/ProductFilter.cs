@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TheWebShop.Common.Filters.Product
 {
-    public class ProductFilter : BaseFilter<ProductOrderBy>
+    public class ProductFilter : BaseFilter<ProductOrderBy>, IProductFilter
     {
         public ProductFilter()
         {

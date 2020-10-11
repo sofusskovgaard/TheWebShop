@@ -32,6 +32,18 @@ namespace TheWebShop.Services.DataAccessServices.Category
                 case CategoryOrderBy.None:
                     return entities;
 
+                case CategoryOrderBy.NameAsc:
+                    return entities.OrderBy(x => x.Name);
+
+                case CategoryOrderBy.NameDesc:
+                    return entities.OrderByDescending(x => x.Name);
+
+                case CategoryOrderBy.ProductsAsc:
+                    return entities.OrderBy(x => x.Products.Count);
+
+                case CategoryOrderBy.ProductsDesc:
+                    return entities.OrderByDescending(x => x.Products.Count);
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(filter.OrderBy), filter.OrderBy, null);
             }

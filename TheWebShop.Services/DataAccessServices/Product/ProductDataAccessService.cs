@@ -9,16 +9,20 @@ using Microsoft.EntityFrameworkCore;
 using TheWebShop.Common.Filters.Product;
 using TheWebShop.Data;
 using TheWebShop.Data.Entities.Product;
+using TheWebShop.Services.CachingServices;
 
 namespace TheWebShop.Services.DataAccessServices.Product
 {
-    public class ProductDataAccessService : BaseDataAccessService<ProductEntity, ProductFilter, ProductOrderBy>
+    public class ProductDataAccessService : BaseDataAccessService<ProductEntity, ProductFilter, ProductOrderBy>, IProductDataAccessService
     {
         private readonly DatabaseContext _context;
 
-        public ProductDataAccessService(DatabaseContextFactory databaseContextFactory)
+        private readonly ICachingService _cachingService;
+
+        public ProductDataAccessService(IDatabaseContextFactory databaseContextFactory, ICachingService cachingService)
         {
-            this._context = databaseContextFactory.CreateDbContext(null);
+            _context = databaseContextFactory.CreateDbContext(null);
+            _cachingService = cachingService;
         }
 
         public override async Task<ProductEntity> GetById(int entityId)
@@ -27,6 +31,8 @@ namespace TheWebShop.Services.DataAccessServices.Product
                 .AsNoTracking()
                 .Include(x => x.Pictures)
                 .Include(x => x.Brand)
+                .Include(x => x.Categories)
+                .ThenInclude(x => x.Category)
                 .Include(x => x.Reviews)
                 .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
@@ -39,6 +45,9 @@ namespace TheWebShop.Services.DataAccessServices.Product
                 .AsNoTracking()
                 .Include(x => x.Pictures)
                 .Include(x => x.Brand)
+                .Include(x => x.Categories)
+                    .ThenInclude(x => x.Category)
+                .Include(x => x.Reviews)
                 .FilterEntities(filter)
                 .OrderEntities(filter)
                 .PaginateEntities(filter)
@@ -73,6 +82,14 @@ namespace TheWebShop.Services.DataAccessServices.Product
             await _context.SaveChangesAsync();
 
             return product;
+        }
+
+        public override async Task<ProductEntity> Create(ProductEntity entity)
+        {
+            var entry = _context.Add(entity);
+            await _context.SaveChangesAsync();
+
+            return entry.Entity;
         }
 
         public override async Task<bool> DeleteById(int entityId)

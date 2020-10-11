@@ -75,10 +75,14 @@ namespace TheWebShop.Services.DataAccessServices.Product
                     return entities.OrderByDescending(x => x.Name);
 
                 case ProductOrderBy.ReviewsAsc:
-                    return entities.OrderBy(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count);
+                    return entities
+                        .OrderBy(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
+                        .ThenByDescending(x => x.RatingCount);
 
                 case ProductOrderBy.ReviewsDesc:
-                    return entities.OrderByDescending(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count);
+                    return entities
+                        .OrderByDescending(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
+                        .ThenByDescending(x => x.RatingCount);
 
                 case ProductOrderBy.PriceAsc:
                     return entities.OrderBy(x => x.Price);

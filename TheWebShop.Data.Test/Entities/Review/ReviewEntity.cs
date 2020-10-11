@@ -10,7 +10,7 @@ namespace TheWebShop.Data.Test.Entities.Review
     public class ReviewEntity
     {
         private readonly DbContextOptions<DatabaseContext> _options = new DbContextOptionsBuilder<DatabaseContext>()
-            .UseSqlServer("Server=localhost;Database=TheWebShopTest;User Id=sa;Password=P@ssw0rd;")
+            .UseSqlServer("Server=localhost;Database=TheWebShopTest;User Id=sa;Password=P@ssw0rd!;")
             .Options;
         
         private void SeedDatabase()

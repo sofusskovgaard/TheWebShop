@@ -10,6 +10,8 @@ namespace TheWebShop.Data.Entities.Category
     {
         string Name { get; set; }
 
+        string Description { get; set; }
+
         int? ParentCategoryEntityId { get; set; }
         
         CategoryEntity ParentCategory { get; set; }

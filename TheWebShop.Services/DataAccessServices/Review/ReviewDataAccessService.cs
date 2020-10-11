@@ -10,11 +10,11 @@ using TheWebShop.Data.Entities.Review;
 
 namespace TheWebShop.Services.DataAccessServices.Review
 {
-    public class ReviewDataAccessService : BaseDataAccessService<ReviewEntity, ReviewFilter, ReviewOrderBy>
+    public class ReviewDataAccessService : BaseDataAccessService<ReviewEntity, ReviewFilter, ReviewOrderBy>, IReviewDataAccessService
     {
         private readonly DatabaseContext _context;
 
-        public ReviewDataAccessService(DatabaseContextFactory databaseContextFactory)
+        public ReviewDataAccessService(IDatabaseContextFactory databaseContextFactory)
         {
             this._context = databaseContextFactory.CreateDbContext(null);
         }
@@ -66,6 +66,14 @@ namespace TheWebShop.Services.DataAccessServices.Review
             await _context.SaveChangesAsync();
 
             return review;
+        }
+
+        public override async Task<ReviewEntity> Create(ReviewEntity entity)
+        {
+            var entry = _context.Add(entity);
+            await _context.SaveChangesAsync();
+
+            return entry.Entity;
         }
 
         public override async Task<bool> DeleteById(int entityId)

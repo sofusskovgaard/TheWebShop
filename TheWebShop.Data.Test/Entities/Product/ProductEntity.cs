@@ -8,7 +8,7 @@ namespace TheWebShop.Data.Test.Entities.Product
     public class ProductEntity
     {
         private readonly DbContextOptions<DatabaseContext> _options = new DbContextOptionsBuilder<DatabaseContext>()
-            .UseSqlServer("Server=localhost;Database=TheWebShopTest;User Id=sa;Password=P@ssw0rd;")
+            .UseSqlServer("Server=localhost;Database=TheWebShopTest;User Id=sa;Password=P@ssw0rd!;")
             .Options;
         private void SeedDatabase()
         {

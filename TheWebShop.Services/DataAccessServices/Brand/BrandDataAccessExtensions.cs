@@ -33,6 +33,18 @@ namespace TheWebShop.Services.DataAccessServices.Brand
                 case BrandOrderBy.None:
                     return entities;
 
+                case BrandOrderBy.NameAsc:
+                    return entities.OrderBy(x => x.Name);
+
+                case BrandOrderBy.NameDesc:
+                    return entities.OrderByDescending(x => x.Name);
+
+                case BrandOrderBy.ProductsAsc:
+                    return entities.OrderBy(x => x.Products.Count);
+
+                case BrandOrderBy.ProductsDesc:
+                    return entities.OrderByDescending(x => x.Products.Count);
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(filter.OrderBy), filter.OrderBy, null);
             }

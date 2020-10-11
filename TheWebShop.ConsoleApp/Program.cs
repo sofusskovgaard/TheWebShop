@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Reflection;
+
+using AutoMapper;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using TheWebShop.Data;
+using TheWebShop.Services.CachingServices;
 using TheWebShop.Services.DataAccessServices.Brand;
 using TheWebShop.Services.DataAccessServices.Category;
 using TheWebShop.Services.DataAccessServices.Product;
@@ -20,7 +24,7 @@ namespace TheWebShop.ConsoleApp
             RegisterServices();
 
             // Start actual application
-            _serviceProvider.GetService<Application>().Run();
+            _serviceProvider.GetService<Application>().Run().Wait();
 
             // Dispose of service provider
             DisposeServices();
@@ -36,13 +40,25 @@ namespace TheWebShop.ConsoleApp
 
             // Configure services to inject.
 
-            services.AddSingleton<DatabaseContextFactory>();
+            services.AddSingleton<IDatabaseContextFactory, DatabaseContextFactory>();
+
+            services.AddDistributedRedisCache(
+                options =>
+                {
+                    var host = "localhost";
+                    var port = 6379;
+
+                    options.Configuration = $"{host}:{port}";
+                }
+            );
+
+            services.AddTransient<ICachingService, CachingService>();
 
             // Configure data access services
-            services.AddTransient<ProductDataAccessService>();
-            services.AddTransient<CategoryDataAccessService>();
-            services.AddTransient<BrandDataAccessService>();
-            services.AddTransient<ReviewDataAccessService>();
+            services.AddTransient<IProductDataAccessService, ProductDataAccessService>();
+            services.AddTransient<ICategoryDataAccessService, CategoryDataAccessService>();
+            services.AddTransient<IBrandDataAccessService, BrandDataAccessService>();
+            services.AddTransient<IReviewDataAccessService, ReviewDataAccessService>();
 
             services.AddSingleton<Application>();
 

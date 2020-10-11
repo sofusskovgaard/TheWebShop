@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 using TheWebShop.Data.Entities.Brand;
@@ -25,6 +26,10 @@ namespace TheWebShop.Data.Entities.Product
         public ICollection<ProductPictureEntity> Pictures { get; set; }
 
         public ICollection<ProductCategoryEntity> Categories { get; set; }
+
+        public double Rating => RatingCount > 0 ? Reviews.Sum(x => x.Rating) / RatingCount : 0;
+
+        public int RatingCount => Reviews.Count;
 
         public ICollection<ReviewEntity> Reviews { get; set; }
     }

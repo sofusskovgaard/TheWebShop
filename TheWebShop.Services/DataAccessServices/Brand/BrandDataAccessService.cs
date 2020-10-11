@@ -10,11 +10,11 @@ using TheWebShop.Data.Entities.Brand;
 
 namespace TheWebShop.Services.DataAccessServices.Brand
 {
-    public class BrandDataAccessService : BaseDataAccessService<BrandEntity, BrandFilter, BrandOrderBy>
+    public class BrandDataAccessService : BaseDataAccessService<BrandEntity, BrandFilter, BrandOrderBy>, IBrandDataAccessService
     {
         private readonly DatabaseContext _context;
 
-        public BrandDataAccessService(DatabaseContextFactory databaseContextFactory)
+        public BrandDataAccessService(IDatabaseContextFactory databaseContextFactory)
         {
             this._context = databaseContextFactory.CreateDbContext(null);
         }
@@ -23,6 +23,8 @@ namespace TheWebShop.Services.DataAccessServices.Brand
         {
             var brand = await _context.Brands
                 .AsNoTracking()
+                .Include(x => x.Products)
+                    .ThenInclude(x => x.Reviews)
                 .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
             return brand;
@@ -32,6 +34,8 @@ namespace TheWebShop.Services.DataAccessServices.Brand
         {
             var brands = await _context.Brands
                 .AsNoTracking()
+                .Include(x => x.Products)
+                    .ThenInclude(x => x.Reviews)
                 .FilterEntities(filter)
                 .OrderEntities(filter)
                 .PaginateEntities(filter)
@@ -66,6 +70,14 @@ namespace TheWebShop.Services.DataAccessServices.Brand
             await _context.SaveChangesAsync();
 
             return brand;
+        }
+
+        public override async Task<BrandEntity> Create(BrandEntity entity)
+        {
+            var entry = _context.Add(entity);
+            await _context.SaveChangesAsync();
+
+            return entry.Entity;
         }
 
         public override async Task<bool> DeleteById(int entityId)

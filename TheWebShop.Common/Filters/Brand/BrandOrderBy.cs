@@ -2,6 +2,10 @@
 {
     public enum BrandOrderBy
     {
-        None
+        None,
+        NameAsc,
+        NameDesc,
+        ProductsAsc,
+        ProductsDesc
     }
 }

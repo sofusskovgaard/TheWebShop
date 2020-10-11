@@ -2,6 +2,10 @@
 {
     public enum CategoryOrderBy
     {
-        None
+        None,
+        NameAsc,
+        NameDesc,
+        ProductsAsc,
+        ProductsDesc
     }
 }

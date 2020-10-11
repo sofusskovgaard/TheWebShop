@@ -22,6 +22,8 @@ namespace TheWebShop.Services.DataAccessServices
 
         public abstract Task<TEntity> UpdateById(int entityId, object data);
 
+        public abstract Task<TEntity> Create(TEntity entity);
+
         public abstract Task<bool> DeleteById(int entityId);
     }
 }

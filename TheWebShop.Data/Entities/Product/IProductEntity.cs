@@ -23,6 +23,10 @@ namespace TheWebShop.Data.Entities.Product
 
         ICollection<ProductCategoryEntity> Categories { get; set; }
 
+        double Rating { get; }
+        
+        int RatingCount { get; }
+        
         ICollection<ReviewEntity> Reviews { get; set; }
     }
 }
