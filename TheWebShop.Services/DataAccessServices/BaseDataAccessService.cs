@@ -25,5 +25,7 @@ namespace TheWebShop.Services.DataAccessServices
         public abstract Task<TEntity> Create(TEntity entity);
 
         public abstract Task<bool> DeleteById(int entityId);
+
+        public abstract Task<int> CountEntitiesByFiter(TFilter filter);
     }
 }

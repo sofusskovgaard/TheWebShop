@@ -96,5 +96,13 @@ namespace TheWebShop.Services.DataAccessServices.Brand
                 return false;
             }
         }
+
+        public override async Task<int> CountEntitiesByFiter(BrandFilter filter)
+        {
+            return await _context.Brands
+                .AsNoTracking()
+                .FilterEntities(filter)
+                .CountAsync();
+        }
     }
 }

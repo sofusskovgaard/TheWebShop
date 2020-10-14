@@ -17,12 +17,9 @@ namespace TheWebShop.Services.DataAccessServices.Product
     {
         private readonly DatabaseContext _context;
 
-        private readonly ICachingService _cachingService;
-
-        public ProductDataAccessService(IDatabaseContextFactory databaseContextFactory, ICachingService cachingService)
+        public ProductDataAccessService(IDatabaseContextFactory databaseContextFactory)
         {
             _context = databaseContextFactory.CreateDbContext(null);
-            _cachingService = cachingService;
         }
 
         public override async Task<ProductEntity> GetById(int entityId)
@@ -111,6 +108,14 @@ namespace TheWebShop.Services.DataAccessServices.Product
             {
                 return false;
             }
+        }
+
+        public override async Task<int> CountEntitiesByFiter(ProductFilter filter)
+        {
+            return await _context.Products
+                .AsNoTracking()
+                .FilterEntities(filter)
+                .CountAsync();
         }
     }
 }

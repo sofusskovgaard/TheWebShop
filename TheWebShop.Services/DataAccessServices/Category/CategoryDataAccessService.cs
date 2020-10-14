@@ -102,5 +102,13 @@ namespace TheWebShop.Services.DataAccessServices.Category
                 return false;
             }
         }
+
+        public override async Task<int> CountEntitiesByFiter(CategoryFilter filter)
+        {
+            return await _context.Categories
+                .AsNoTracking()
+                .FilterEntities(filter)
+                .CountAsync();
+        }
     }
 }

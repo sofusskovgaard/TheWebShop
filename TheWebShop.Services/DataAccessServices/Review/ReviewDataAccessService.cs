@@ -92,5 +92,13 @@ namespace TheWebShop.Services.DataAccessServices.Review
                 return false;
             }
         }
+
+        public override async Task<int> CountEntitiesByFiter(ReviewFilter filter)
+        {
+            return await _context.Reviews
+                .AsNoTracking()
+                .FilterEntities(filter)
+                .CountAsync();
+        }
     }
 }
