@@ -9,8 +9,12 @@
 </head>
 <body>
     @await Html.PartialAsync("./Partials/Navbar")
+  
+    @if (ViewData["ShowHero"] is bool)
+    {
+        @await Html.PartialAsync("./Partials/Hero")
+    }
 
-    @await Html.PartialAsync("./Partials/Hero") 
 
     <div class="container py-5">
         <main role="main">

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TheWebShop.Data.Entities.IBaseEntity>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+
+    @foreach (var prop in Model.GetType().GetGenericArguments()[0].GetProperties())
+    {
+      <th>@prop.Name</th>
+    }
+
+  </tr>
+  </thead>
+  <tbody>
+
+  @foreach (var entity in Model)
+  {
+    <tr>
+      @foreach (var prop in entity.GetType().GetProperties())
+      {
+        <td>@prop.GetValue(entity)</td>
+      }
+    </tr>
+  }
+
+  </tbody>
+</table>

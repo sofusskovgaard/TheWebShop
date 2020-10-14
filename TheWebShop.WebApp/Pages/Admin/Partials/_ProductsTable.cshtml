@@ -1,0 +1,68 @@
+﻿@model IndexModel
+
+<h3 class="m-0">Products - @Model.TotalProducts</h3>
+<small class="d-block text-muted mb-2">Donec vitae erat hendrerit, hendrerit lectus at, faucibus odio.</small>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+
+    <th>EntityID</th>
+    <th>Brand</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Rating</th>
+    <th>Ratings</th>
+
+  </tr>
+  </thead>
+  <tbody>
+
+  @foreach (var entity in Model.Products)
+  {
+    <tr>
+      <td>@entity.EntityId</td>
+      <td>@entity.Brand.Name</td>
+      <td>@entity.Name</td>
+      <td>@entity.Price</td>
+      <td>@entity.Rating</td>
+      <td>@entity.RatingCount</td>
+    </tr>
+  }
+
+  </tbody>
+</table>
+
+@{
+  var paginationCount = Model.TotalProducts / Model.PageSize;
+
+  if (paginationCount / 1 > 0)
+  {
+    paginationCount += 1 - paginationCount % 1;
+  }
+}
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#">Previous</a>
+    </li>
+
+    @for (var i = 0; i < paginationCount; i++)
+    {
+      var routeParams = new Dictionary<string, string>()
+      {
+        { "p", (i + 1).ToString() },
+        { "pageSize", (6).ToString() }
+      };
+
+      <li class="page-item">
+        <a class="page-link@(Model.Page == i ? " active" : "")" asp-route-page="@(i + 1)">@(i+1)</a>
+      </li>
+    }
+
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>

@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{718550B2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWebShop.Data.Test", "TheWebShop.Data.Test\TheWebShop.Data.Test.csproj", "{BE6042D6-3049-43F2-8458-5C22860F65E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWebShop.WebApp", "TheWebShop.WebApp\TheWebShop.WebApp.csproj", "{9CC561D6-E22A-4C7A-A6C7-3742C12BC117}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheWebShop.WebApp", "TheWebShop.WebApp\TheWebShop.WebApp.csproj", "{9CC561D6-E22A-4C7A-A6C7-3742C12BC117}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
