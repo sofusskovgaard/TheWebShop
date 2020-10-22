@@ -6,7 +6,7 @@ namespace TheWebShop.Common.Models.Product
         
         public string Description { get; set; }
         
-        public int BrandEntityId { get; set; }
+        public int? BrandEntityId { get; set; }
         
         public double Price { get; set; }
         

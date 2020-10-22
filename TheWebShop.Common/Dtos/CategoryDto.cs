@@ -15,6 +15,8 @@ namespace TheWebShop.Common.Dtos
         public CategoryDto ParentCategory { get; set; }
 
         public List<CategoryDto> ChildCategories { get; set; }
+
+        public int ProductCount { get; set; }
     }
 
     public class CategoryDetailedDto : CategoryDto

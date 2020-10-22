@@ -1,12 +1,13 @@
 ﻿@model TheWebShop.WebApp.Models.BasePaginatedPage
 @{
-    var paginationCount = Model.TotalResults / Model.ps;
+    int paginationCount = Model.TotalResults / Model.ps;
+    double paginationRest = Model.TotalResults % Model.ps;
 
-    if (paginationCount / 1 > 0)
+    if (paginationRest > 0)
     {
-        paginationCount += 1 - paginationCount % 1;
+        paginationCount += 1;
     }
-    else if (paginationCount == 0)
+    else if (paginationCount == 0 && paginationRest > 0)
     {
         paginationCount = 1;
     }
@@ -23,12 +24,12 @@
 
             @for (var i = 0; i < paginationCount; i++)
             {
-                <li class="page-item@(Model.p == (i+1) ? " active" : "")">
-                    <a class="page-link" asp-all-route-data="@Model.preexistingFilters" asp-route-p="@(i + 1)" asp-route-ps="@(Model.ps)">@(i+1)</a>
+                <li class="page-item@(Model.p == i + 1 ? " active" : "")">
+                    <a class="page-link" asp-all-route-data="@Model.preexistingFilters" asp-route-p="@(i + 1)" asp-route-ps="@(Model.ps)">@(i + 1)</a>
                 </li>
             }
 
-            <li class="page-item@(paginationCount == (Model.p) ? " disabled" : "")">
+            <li class="page-item@(paginationCount == Model.p ? " disabled" : "")">
                 <a class="page-link" asp-all-route-data="@Model.preexistingFilters" asp-route-p="@(Model.p + 1)" asp-route-ps="@(Model.ps)">
                     <i class="fas fa-angle-right fa-fw"></i>
                 </a>

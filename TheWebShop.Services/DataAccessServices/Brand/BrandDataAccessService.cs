@@ -84,7 +84,9 @@ namespace TheWebShop.Services.DataAccessServices.Brand
         {
             try
             {
-                var brand = await _context.Brands.FirstOrDefaultAsync(x => x.EntityId == entityId);
+                var brand = await _context.Brands
+                                .Include(x => x.Products)
+                                .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
                 _context.Brands.Remove(brand);
                 await _context.SaveChangesAsync();

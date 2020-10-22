@@ -1,0 +1,28 @@
+﻿@model IndexModel
+
+<div class="card mb-3">
+    <div class="card-body">
+        <button class="btn p-0" type="button" data-toggle="collapse" data-target="#ratingCollapse" aria-expanded="false" aria-controls="ratingCollapse">
+            <h5 class="card-title m-0">Rating</h5>
+        </button>
+
+        <div id="ratingCollapse" class="collapse show form-row mt-2">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="@Model.Filter.MinRating">Min Rating</label>
+                    <input type="number" class="form-control" asp-for="@Model.Filter.MinRating" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="@Model.Filter.MaxRating">Max Rating</label>
+                    <input type="number" class="form-control" asp-for="@Model.Filter.MaxRating" />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

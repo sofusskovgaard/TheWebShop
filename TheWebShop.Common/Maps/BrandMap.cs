@@ -1,5 +1,6 @@
 using AutoMapper;
 using TheWebShop.Common.Dtos;
+using TheWebShop.Common.Models.Forms;
 using TheWebShop.Data.Entities.Brand;
 
 namespace TheWebShop.Common.Maps
@@ -12,6 +13,12 @@ namespace TheWebShop.Common.Maps
                 .ReverseMap();
 
             CreateMap<BrandEntity, BrandDetailedDto>()
+                .ReverseMap();
+
+            CreateMap<BrandDto, BrandFormModel>()
+                .ReverseMap();
+
+            CreateMap<BrandEntity, BrandFormModel>()
                 .ReverseMap();
         }
     }

@@ -1,0 +1,10 @@
+﻿@model IndexModel
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control border" asp-for="@Model.Filter.Query"/>
+    <div class="input-group-append">
+        <button type="submit" class="btn btn-light border">
+            <i class="fas fa-search fa-fw"></i>
+        </button>
+    </div>
+</div>

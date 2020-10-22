@@ -18,7 +18,11 @@ namespace TheWebShop.Common.Filters.Product
         
         public int? Category { get; set; }
 
+        public bool PrioritizeHighlighted { get; set; } = true;
+
         public bool IncludeOutOfStock { get; set; } = true;
+
+        public bool IncludeInactive { get; set; } = false;
 
         public override ProductOrderBy OrderBy { get; set; } = ProductOrderBy.None;
     }

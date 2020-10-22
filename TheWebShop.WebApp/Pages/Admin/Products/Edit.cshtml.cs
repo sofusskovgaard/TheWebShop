@@ -55,7 +55,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
             ProductPictures = await _productService.GetPicturesForProduct(entityId);
             
             var brands = await _brandService.GetByFilter<BrandDto>(new BrandFilter() { PageSize = 0 });
-            Brands = new SelectList(brands, nameof(BrandDto.EntityId), nameof(BrandDto.Name), brands.FirstOrDefault(x => x.EntityId == Product.Brand.EntityId));
+            Brands = new SelectList(brands, nameof(BrandDto.EntityId), nameof(BrandDto.Name), Product.Brand != null ? brands.FirstOrDefault(x => x.EntityId == Product.Brand.EntityId) : null);
 
             FormModel = _mapper.Map<ProductFormModel>(Product);
             

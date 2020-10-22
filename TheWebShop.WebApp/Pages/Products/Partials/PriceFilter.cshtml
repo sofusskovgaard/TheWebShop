@@ -1,0 +1,27 @@
+﻿@model IndexModel
+
+<div class="card mb-3">
+    <div class="card-body">
+        <button class="btn p-0" type="button" data-toggle="collapse" data-target="#pricingCollapse" aria-expanded="false" aria-controls="pricingCollapse">
+            <h5 class="card-title m-0">Pricing</h5>
+        </button>
+
+        <div id="pricingCollapse" class="collapse show form-row mt-2">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="@Model.Filter.MinPrice">Min Price</label>
+                    <input type="number" class="form-control" asp-for="@Model.Filter.MinPrice" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="@Model.Filter.MaxPrice">Max Price</label>
+                    <input type="number" class="form-control" asp-for="@Model.Filter.MaxPrice" />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

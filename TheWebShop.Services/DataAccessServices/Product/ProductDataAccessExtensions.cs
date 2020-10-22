@@ -19,6 +19,9 @@ namespace TheWebShop.Services.DataAccessServices.Product
             if (!filter.IncludeOutOfStock)
                 filteredEntities = filteredEntities.Where(x => x.Stock > 0);
 
+            if (!filter.IncludeInactive) 
+                filteredEntities = filteredEntities.Where(x => x.Active);
+
             if (!string.IsNullOrEmpty(filter.Query))
             {
                 filteredEntities = filteredEntities.Where(x => x.Name.ToLower().Contains(filter.Query.ToLower()));
@@ -73,45 +76,111 @@ namespace TheWebShop.Services.DataAccessServices.Product
             this IQueryable<ProductEntity> entities, ProductFilter filter
         )
         {
-            switch (filter.OrderBy)
+
+            if (filter.PrioritizeHighlighted)
             {
-                case ProductOrderBy.None:
-                    return entities;
+                var orderedEntities = entities.OrderByDescending(x => x.Highlight);
 
-                case ProductOrderBy.NameAsc:
-                    return entities.OrderByDescending(x => x.Highlight).ThenBy(x => x.Name);
+                switch (filter.OrderBy)
+                {
+                    case ProductOrderBy.None:
+                        break;
 
-                case ProductOrderBy.NameDesc:
-                    return entities.OrderByDescending(x => x.Highlight).ThenByDescending(x => x.Name);
+                    case ProductOrderBy.NameAsc:
+                        orderedEntities = orderedEntities.ThenBy(x => x.Name);
+                        break;
 
-                case ProductOrderBy.ReviewsAsc:
-                    return entities
-                        .OrderBy(x => x.Highlight)
-                        .ThenBy(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
-                        .ThenByDescending(x => x.Reviews.Count)
-                        .ThenByDescending(x => x.CreatedAt);
+                    case ProductOrderBy.NameDesc:
+                        orderedEntities = orderedEntities.ThenByDescending(x => x.Name);
+                        break;
 
-                case ProductOrderBy.ReviewsDesc:
-                    return entities
-                        .OrderByDescending(x => x.Highlight)
-                        .ThenByDescending(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
-                        .ThenByDescending(x => x.Reviews.Count)
-                        .ThenByDescending(x => x.CreatedAt);
+                    case ProductOrderBy.ReviewsAsc:
+                        orderedEntities = orderedEntities
+                            .ThenBy(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
+                            .ThenByDescending(x => x.Reviews.Count)
+                            .ThenByDescending(x => x.CreatedAt);
+                        break;
 
-                case ProductOrderBy.PriceAsc:
-                    return entities.OrderByDescending(x => x.Highlight).ThenBy(x => x.Price);
+                    case ProductOrderBy.ReviewsDesc:
+                        orderedEntities = orderedEntities.ThenByDescending(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
+                            .ThenByDescending(x => x.Reviews.Count)
+                            .ThenByDescending(x => x.CreatedAt);
+                        break;
 
-                case ProductOrderBy.PriceDesc:
-                    return entities.OrderByDescending(x => x.Highlight).ThenByDescending(x => x.Price);
+                    case ProductOrderBy.PriceAsc:
+                        orderedEntities = orderedEntities.ThenBy(x => x.Price);
+                        break;
 
-                case ProductOrderBy.CreatedAtAsc:
-                    return entities.OrderByDescending(x => x.Highlight).ThenBy(x => x.CreatedAt);
+                    case ProductOrderBy.PriceDesc:
+                        orderedEntities = orderedEntities.ThenByDescending(x => x.Price);
+                        break;
 
-                case ProductOrderBy.CreatedAtDesc:
-                    return entities.OrderByDescending(x => x.Highlight).ThenByDescending(x => x.CreatedAt);
+                    case ProductOrderBy.CreatedAtAsc:
+                        orderedEntities = orderedEntities.ThenBy(x => x.CreatedAt);
+                        break;
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(filter.OrderBy), filter.OrderBy, null);
+                    case ProductOrderBy.CreatedAtDesc:
+                        orderedEntities = orderedEntities.ThenByDescending(x => x.CreatedAt);
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(filter.OrderBy), filter.OrderBy, null);
+                }
+
+                return orderedEntities;
+            }
+            else
+            {
+                var orderedEntities = entities;
+
+                switch (filter.OrderBy)
+                {
+                    case ProductOrderBy.None:
+                        break;
+
+                    case ProductOrderBy.NameAsc:
+                        orderedEntities = orderedEntities.OrderBy(x => x.Name);
+                        break;
+
+                    case ProductOrderBy.NameDesc:
+                        orderedEntities = orderedEntities.OrderByDescending(x => x.Name);
+                        break;
+
+                    case ProductOrderBy.ReviewsAsc:
+                        orderedEntities = orderedEntities
+                            .OrderBy(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
+                            .ThenByDescending(x => x.Reviews.Count)
+                            .ThenByDescending(x => x.CreatedAt);
+                        break;
+
+                    case ProductOrderBy.ReviewsDesc:
+                        orderedEntities = orderedEntities
+                            .OrderByDescending(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
+                            .ThenByDescending(x => x.Reviews.Count)
+                            .ThenByDescending(x => x.CreatedAt);
+                        break;
+
+                    case ProductOrderBy.PriceAsc:
+                        orderedEntities = orderedEntities.OrderBy(x => x.Price);
+                        break;
+
+                    case ProductOrderBy.PriceDesc:
+                        orderedEntities = orderedEntities.OrderByDescending(x => x.Price);
+                        break;
+
+                    case ProductOrderBy.CreatedAtAsc:
+                        orderedEntities = orderedEntities.OrderBy(x => x.CreatedAt);
+                        break;
+
+                    case ProductOrderBy.CreatedAtDesc:
+                        orderedEntities = orderedEntities.OrderByDescending(x => x.CreatedAt);
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(filter.OrderBy), filter.OrderBy, null);
+                }
+
+                return orderedEntities;
             }
         }
 

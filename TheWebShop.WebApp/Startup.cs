@@ -46,12 +46,12 @@ namespace TheWebShop.WebApp
             services.AddScoped<IDatabaseContextFactory, DatabaseContextFactory>();
             
             // MiniProfiler
-            services.AddMiniProfiler(options =>
-            {
-                options.SqlFormatter = new StackExchange.Profiling.SqlFormatters.VerboseSqlServerFormatter();
-                options.EnableMvcFilterProfiling = true;
-                options.EnableMvcViewProfiling = true;
-            }).AddEntityFramework();
+            //services.AddMiniProfiler(options =>
+            //{
+            //    options.SqlFormatter = new StackExchange.Profiling.SqlFormatters.VerboseSqlServerFormatter();
+            //    options.EnableMvcFilterProfiling = true;
+            //    options.EnableMvcViewProfiling = true;
+            //}).AddEntityFramework();
 
             //services.AddDistributedRedisCache(
             //    options =>

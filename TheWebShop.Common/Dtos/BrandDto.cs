@@ -15,6 +15,8 @@ namespace TheWebShop.Common.Dtos
         public string Website { get; set; }
         
         public string PhoneNumber { get; set; }
+
+        public int ProductCount { get; set; }
     }
 
     public class BrandDetailedDto : BrandDto {

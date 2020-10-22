@@ -1,0 +1,35 @@
+﻿@model IndexModel
+
+<div class="card mb-3">
+    <div class="card-body">
+
+        <button class="btn p-0" type="button" data-toggle="collapse" data-target="#brandsCollapse" aria-expanded="false" aria-controls="brandsCollapse">
+            <h5 class="card-title m-0">Brands</h5>
+        </button>
+
+        <div id="brandsCollapse" class="collapse show mt-2">
+
+            <fieldset id="brands">
+
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" asp-for="@Model.Filter.Brand" id="brands_all" value="" checked onchange="this.form.submit()">
+                        All
+                    </label>
+                </div>
+
+                @foreach (var brand in Model.Brands)
+                {
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="@Model.Filter.Brand" id="brand_@brand.EntityId" value="@brand.EntityId" onchange="this.form.submit()">
+                            @brand.Name
+                        </label>
+                    </div>
+                }
+
+            </fieldset>
+
+        </div>
+    </div>
+</div>

@@ -17,7 +17,7 @@
     }
 
     <div class="card-body d-flex flex-column">
-        <a class="text-dark text-decoration-none" asp-page="/Products/Details" asp-route-entityId="@Model.EntityId">
+        <a class="text-dark text-decoration-none" asp-page="/Products/Index" asp-route-Filter.Brand="@Model.BrandEntityId">
             @if (Model.Brand != null)
             {
                 <h6 class="font-weight-normal m-0" style="font-family: 'Playfair Display'">@Model.Brand.Name</h6>

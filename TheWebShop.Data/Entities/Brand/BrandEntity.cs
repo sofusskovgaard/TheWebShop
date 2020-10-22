@@ -21,8 +21,10 @@ namespace TheWebShop.Data.Entities.Brand
 
         public double Rating => RatingCount > 0 ? RatingCount / Products.SelectMany(x => x.Reviews).Sum(x => x.Rating) : 0;
 
-        public int RatingCount => Products.SelectMany(x => x.Reviews).Count();
+        public int RatingCount => Products?.SelectMany(x => x.Reviews).Count() ?? 0;
 
         public ICollection<ProductEntity> Products { get; set; }
+
+        public int ProductCount => Products?.Count() ?? 0;
     }
 }

@@ -72,7 +72,9 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="@Model.Product.Brand"></label>
-                <select class="custom-select" asp-for="@Model.FormModel.BrandEntityId" asp-items="@Model.Brands"></select>
+                <select class="custom-select" asp-for="@Model.FormModel.BrandEntityId" asp-items="@Model.Brands">
+                    <option value="@null" selected>None</option>
+                </select>
             </div>
         </div>
         <div class="col-md-2">
@@ -102,7 +104,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <div class="form-check">
-                    <label class="form-check-label" asp-for="@Model.Product.Active">
+                    <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" asp-for="@Model.FormModel.Active">
                         Active
                     </label>
@@ -114,7 +116,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <div class="form-check">
-                    <label class="form-check-label" asp-for="@Model.Product.Highlight">
+                    <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" asp-for="@Model.FormModel.Highlight">
                         Highlight
                     </label>

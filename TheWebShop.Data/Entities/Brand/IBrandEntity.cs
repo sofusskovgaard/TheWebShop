@@ -21,5 +21,7 @@ namespace TheWebShop.Data.Entities.Brand
         int RatingCount { get; }
 
         ICollection<ProductEntity> Products { get; set; }
+
+        int ProductCount { get; }
     }
 }
