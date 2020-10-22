@@ -6,11 +6,6 @@ namespace TheWebShop.Common.Filters.Product
 {
     public class ProductFilter : BaseFilter<ProductOrderBy>, IProductFilter
     {
-        public ProductFilter()
-        {
-            OrderBy = ProductOrderBy.None;
-        }
-
         public double? MinPrice { get; set; }
 
         public double? MaxPrice { get; set; }
@@ -19,8 +14,12 @@ namespace TheWebShop.Common.Filters.Product
 
         public int? MaxRating { get; set; }
 
+        public int? Brand { get; set; }
+        
         public int? Category { get; set; }
 
-        public override ProductOrderBy OrderBy { get; set; }
+        public bool IncludeOutOfStock { get; set; } = true;
+
+        public override ProductOrderBy OrderBy { get; set; } = ProductOrderBy.None;
     }
 }

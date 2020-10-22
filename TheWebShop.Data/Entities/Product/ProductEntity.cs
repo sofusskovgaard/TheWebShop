@@ -15,6 +15,8 @@ namespace TheWebShop.Data.Entities.Product
     public class ProductEntity : BaseEntity, IProductEntity
     {
         public string Name { get; set; }
+        
+        public string Description { get; set; }
 
         public int? BrandEntityId { get; set; }
 
@@ -29,7 +31,13 @@ namespace TheWebShop.Data.Entities.Product
 
         public double Rating => RatingCount > 0 ? Reviews.Sum(x => x.Rating) / RatingCount : 0;
 
-        public int RatingCount => Reviews.Count;
+        public int RatingCount => Reviews?.Count ?? 0;
+        
+        public bool Highlight { get; set; }
+
+        public bool InStock => Stock > 0;
+        
+        public int Stock { get; set; }
 
         public ICollection<ReviewEntity> Reviews { get; set; }
     }

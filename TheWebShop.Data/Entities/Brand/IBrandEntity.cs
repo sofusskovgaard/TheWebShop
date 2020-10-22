@@ -9,6 +9,12 @@ namespace TheWebShop.Data.Entities.Brand
     public interface IBrandEntity : IBaseEntity
     {
         string Name { get; set; }
+        
+        string Email { get; set; }
+        
+        string Website { get; set; }
+        
+        string PhoneNumber { get; set; }
 
         double Rating { get; }
 

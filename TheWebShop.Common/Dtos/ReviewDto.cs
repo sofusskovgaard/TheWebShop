@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-using TheWebShop.Common.Dtos.Product;
+using TheWebShop.Common.Dtos;
 
-namespace TheWebShop.Common.Dtos.Review
+namespace TheWebShop.Common.Dtos
 {
     public class ReviewDto : BaseDto
     {

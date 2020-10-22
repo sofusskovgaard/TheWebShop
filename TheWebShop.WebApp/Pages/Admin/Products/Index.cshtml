@@ -1,0 +1,101 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="d-flex align-items-center justify-content-between">
+    <div>
+        <h3 class="m-0">Products</h3>
+        <small class="d-block text-muted mb-2">Donec vitae erat hendrerit, hendrerit lectus at, faucibus odio.</small>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center">
+        <small class="mr-3 text-muted">Total results: @Model.TotalResults</small>
+
+        <form method="get">
+            <input type="hidden" asp-for="@Model.p"/>
+            <select class="custom-select" asp-for="@Model.ps" onchange="this.form.submit()">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </form>
+
+    </div>
+
+</div>
+
+<table class="table table-bordered">
+    <caption>
+        <small>Page results: @Model.Products.Count()</small>
+    </caption>
+    <thead>
+    <tr>
+
+        <th class="position-sticky bg-white" style="top:-1px">EntityID</th>
+        <th class="position-sticky bg-white" style="top:-1px">Brand</th>
+        <th class="position-sticky bg-white" style="top:-1px">Name</th>
+        <th class="position-sticky bg-white" style="top:-1px">Price</th>
+        <th class="position-sticky bg-white" style="top:-1px">Stock</th>
+        <th class="position-sticky bg-white" style="top:-1px">Rating</th>
+        <th class="position-sticky bg-white" style="top:-1px">Ratings</th>
+        <th class="position-sticky bg-white text-center" style="top:-1px">Highligted</th>
+        <th class="position-sticky bg-white text-center" style="top:-1px">Active</th>
+        <th class="position-sticky bg-white" style="top:-1px"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var entity in Model.Products)
+    {
+        <tr>
+            <td>@entity.EntityId</td>
+            <td>
+                @if (entity.Brand != null)
+                {
+                    @entity.Brand.Name
+                }
+            </td>
+            <td>@entity.Name</td>
+            <td>@($"{entity.Price:C}")</td>
+            <td>@entity.Stock</td>
+            <td>@entity.Rating</td>
+            <td>@entity.RatingCount</td>
+            <td class="text-center">
+                @if (entity.Highlight)
+                {
+                    <i class="fas fa-check fa-fw"></i>
+                }
+                else
+                {
+                    <i class="fas fa-times fa-fw"></i>
+                }
+            </td>
+            <td class="text-center">
+                @if (entity.Active)
+                {
+                    <i class="fas fa-check fa-fw"></i>
+                }
+                else
+                {
+                    <i class="fas fa-times fa-fw"></i>
+                }
+            </td>
+            <td class="text-right">
+                <a class="btn btn-light btn-sm mr-1" asp-page="/Admin/Products/Edit" asp-route-entityId="@entity.EntityId">
+                    <i class="fas fa-edit fa-fw"></i>
+                </a>
+                <a class="btn btn-danger btn-sm" asp-page="/Admin/Products/Delete" asp-route-entityId="@entity.EntityId">
+                    <i class="fas fa-trash fa-fw"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+@await Html.PartialAsync("Shared/Partials/Pagination")

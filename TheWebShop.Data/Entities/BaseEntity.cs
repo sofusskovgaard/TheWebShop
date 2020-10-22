@@ -6,10 +6,12 @@ using System.Text;
 
 namespace TheWebShop.Data.Entities
 {
-    public abstract class BaseEntity : IBaseEntity
+    public class BaseEntity : IBaseEntity
     {
         [Key]
         public int EntityId { get; set; }
+
+        public bool Active { get; set; } = true;
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }

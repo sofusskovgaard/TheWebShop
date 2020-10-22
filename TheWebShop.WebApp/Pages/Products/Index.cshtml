@@ -1,0 +1,217 @@
+@page
+@using TheWebShop.Common.Filters.Product
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+<form>
+<div class="row">
+<div class="col-md-3">
+
+    <div class="d-flex flex-column position-sticky" style="top:1rem">
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control border" asp-for="@Model.Filter.Query"/>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-light border">
+                    <i class="fas fa-search fa-fw"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <button class="btn p-0" type="button" data-toggle="collapse" data-target="#brandsCollapse" aria-expanded="false" aria-controls="brandsCollapse">
+                    <h5 class="card-title m-0">Brands</h5>
+                </button>
+
+                <div id="brandsCollapse" class="collapse show mt-2">
+
+                    <fieldset id="brands">
+
+                        <div class="form-check">
+                            <label class="form-check-label" for="brands_all">
+                                <input class="form-check-input" type="radio" asp-for="@Model.Filter.Brand" id="brands_all" value="" checked onchange="this.form.submit()">
+                                All
+                            </label>
+                        </div>
+
+                        @foreach (var brand in Model.Brands)
+                        {
+                            <div class="form-check">
+                                <label class="form-check-label" for="@brand.EntityId">
+                                    <input class="form-check-input" type="radio" asp-for="@Model.Filter.Brand" id="@brand.EntityId" value="@brand.EntityId" onchange="this.form.submit()">
+                                    @brand.Name
+                                </label>
+                            </div>
+                        }
+
+                    </fieldset>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <button class="btn p-0" type="button" data-toggle="collapse" data-target="#categoriesCollapse" aria-expanded="false" aria-controls="categoriesCollapse">
+                    <h5 class="card-title m-0">Categories</h5>
+                </button>
+
+                <div id="categoriesCollapse" class="collapse show mt-2">
+
+                    <fieldset id="categories">
+
+                        <div class="form-check">
+                            <label class="form-check-label" for="categories_all">
+                                <input class="form-check-input" type="radio" asp-for="@Model.Filter.Category" id="categories_all" value="" checked onchange="this.form.submit()">
+                                All
+                            </label>
+                        </div>
+
+                        @foreach (var category in Model.Categories)
+                        {
+                            <div class="form-check">
+                                <label class="form-check-label" for="@category.EntityId">
+                                    <input class="form-check-input" type="radio" asp-for="@Model.Filter.Category" id="@category.EntityId" value="@category.EntityId" onchange="this.form.submit()">
+                                    @category.Name
+                                </label>
+                            </div>
+                        }
+
+                    </fieldset>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <button class="btn p-0" type="button" data-toggle="collapse" data-target="#pricingCollapse" aria-expanded="false" aria-controls="pricingCollapse">
+                    <h5 class="card-title m-0">Pricing</h5>
+                </button>
+
+                <div id="pricingCollapse" class="collapse show form-row mt-2">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="@Model.Filter.MinPrice">Min Price</label>
+                            <input type="number" class="form-control" asp-for="@Model.Filter.MinPrice"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="@Model.Filter.MaxPrice">Max Price</label>
+                            <input type="number" class="form-control" asp-for="@Model.Filter.MaxPrice"/>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <button class="btn p-0" type="button" data-toggle="collapse" data-target="#ratingCollapse" aria-expanded="false" aria-controls="ratingCollapse">
+                    <h5 class="card-title m-0">Rating</h5>
+                </button>
+
+                <div id="ratingCollapse" class="collapse show form-row mt-2">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="@Model.Filter.MinRating">Min Rating</label>
+                            <input type="number" class="form-control" asp-for="@Model.Filter.MinRating"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="@Model.Filter.MaxRating">Max Rating</label>
+                            <input type="number" class="form-control" asp-for="@Model.Filter.MaxRating"/>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col-md-12">
+
+                        <fieldset id="includeOutOfStuckProducts">
+
+                            <div class="form-check">
+                                <label class="form-check-label" for="IncludeOutOfStock_true">
+                                    <input class="form-check-input" type="radio" asp-for="@Model.Filter.IncludeOutOfStock" id="IncludeOutOfStock_true" value="true" checked onchange="this.form.submit()">
+                                    Include out of stock products
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label" for="IncludeOutOfStock_false">
+                                    <input class="form-check-input" type="radio" asp-for="@Model.Filter.IncludeOutOfStock" id="IncludeOutOfStock_false" value="false" onchange="this.form.submit()">
+                                    Hide out of stock products
+                                </label>
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-light btn-block mt-3">Set filters</button>
+        <a class="btn btn-light btn-block mt-3" asp-page="">Reset filters</a>
+
+    </div>
+
+</div>
+
+<div class="col-md-9">
+
+    <div class="d-flex align-items-center mb-3">
+        <div class="form-group m-0">
+            <select class="custom-select" asp-for="@Model.Filter.OrderBy" asp-items="Html.GetEnumSelectList<ProductOrderBy>()" onchange="this.form.submit()"></select>
+        </div>
+
+        <div class="d-flex align-items-center ml-auto">
+            <small class="mr-3 text-muted">Total results: @Model.TotalResults</small>
+            <input type="hidden" asp-for="@Model.p"/>
+            <div class="form-group m-0">
+                <select class="custom-select" asp-for="@Model.ps" onchange="this.form.submit()">
+                    <option value="12">12</option>
+                    <option value="24">24</option>
+                    <option value="48">48</option>
+                    <option value="0">Alle</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));grid-gap:1rem;">
+
+        @foreach (var item in Model.Products)
+        {
+            @await Html.PartialAsync("Shared/Partials/ProductCard", item)
+        }
+
+    </div>
+
+    @if (Model.TotalResults > Model.ps)
+    {
+        @await Html.PartialAsync("Shared/Partials/Pagination", Model)
+    }
+
+</div>
+</div>
+<!-- fuq u nibba -->
+</form>

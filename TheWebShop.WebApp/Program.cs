@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +14,9 @@ namespace TheWebShop.WebApp
     {
         public static void Main(string[] args)
         {
+            var culture = new CultureInfo("da-DK");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -97,7 +97,7 @@ namespace TheWebShop.Services.DataAccessServices.Brand
             }
         }
 
-        public override async Task<int> CountEntitiesByFiter(BrandFilter filter)
+        public override async Task<int> CountEntitiesByFilter(BrandFilter filter)
         {
             return await _context.Brands
                 .AsNoTracking()

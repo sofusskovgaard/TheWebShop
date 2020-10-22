@@ -10,7 +10,11 @@
 
         int? MaxRating { get; set; }
 
+        int? Brand { get; set; }
+        
         int? Category { get; set; }
+        
+        bool IncludeOutOfStock { get; set; } 
 
         ProductOrderBy OrderBy { get; set; }
     }

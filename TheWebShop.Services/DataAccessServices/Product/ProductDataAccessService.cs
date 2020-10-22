@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using TheWebShop.Common.Filters.Product;
 using TheWebShop.Data;
 using TheWebShop.Data.Entities.Product;
+using TheWebShop.Data.Entities.ProductPicture;
 using TheWebShop.Services.CachingServices;
 
 namespace TheWebShop.Services.DataAccessServices.Product
@@ -55,24 +56,28 @@ namespace TheWebShop.Services.DataAccessServices.Product
 
         public override async Task<ProductEntity> UpdateById(int entityId, object data)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(x => x.EntityId == entityId);
+            var product = await _context.Products
+                .Include(x => x.Pictures)
+                .Include(x => x.Brand)
+                .Include(x => x.Reviews)
+                .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
-            foreach (var property in product.GetType().GetProperties())
+            foreach (var property in data.GetType().GetProperties())
             {
                 try
                 {
-                    var propertyValue = property.GetValue(product);
-                    var updatedProperty = data.GetType().GetProperty(property.Name);
-                    var updatedPropertyValue = updatedProperty.GetValue(data);
+                    var propertyValue = property.GetValue(data);
+                    var oldProperty = product.GetType().GetProperty(property.Name);
+                    var oldPropertyValue = oldProperty.GetValue(product);
 
-                    if (propertyValue != updatedPropertyValue)
+                    if (propertyValue != oldPropertyValue)
                     {
-                        property.SetValue(product, updatedPropertyValue);
+                        oldProperty.SetValue(product, propertyValue);
                     }
                 }
                 catch (NullReferenceException ex)
                 {
-
+                    
                 }
             }
 
@@ -110,12 +115,63 @@ namespace TheWebShop.Services.DataAccessServices.Product
             }
         }
 
-        public override async Task<int> CountEntitiesByFiter(ProductFilter filter)
+        public override async Task<int> CountEntitiesByFilter(ProductFilter filter)
         {
             return await _context.Products
                 .AsNoTracking()
                 .FilterEntities(filter)
                 .CountAsync();
+        }
+
+
+        public async Task<IEnumerable<ProductPictureEntity>> GetPicturesForProduct(int entityId)
+        {
+            return await _context.ProductPictures
+                .AsNoTracking()
+                .Where(x => x.ProductEntityId == entityId)
+                .ToListAsync();
+        }
+
+        public async Task<bool> UploadPictures(int entityId, IEnumerable<ProductPictureEntity> productPictures)
+        {
+            try
+            {
+                var product = await _context.Products.FindAsync(entityId);
+
+                if (product.Pictures == null)
+                    product.Pictures = new List<ProductPictureEntity>();
+                
+                foreach (var productPicture in productPictures)
+                {
+                    product.Pictures.Add(productPicture);
+                }
+
+                await _context.SaveChangesAsync();
+                
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeletePictureById(int entityId)
+        {
+            try
+            {
+                var product = await _context.ProductPictures.FindAsync(entityId);
+                
+                _context.ProductPictures.Remove(product);
+
+                await _context.SaveChangesAsync();
+                
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

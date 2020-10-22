@@ -53,7 +53,7 @@ namespace TheWebShop.Services.DataAccessServices.Category
             this IQueryable<CategoryEntity> entities, CategoryFilter filter
         )
         {
-            return entities.Skip((filter.Page - 1) * filter.PageSize).Take(filter.PageSize);
+            return filter.PageSize == 0 ? entities : entities.Skip((filter.Page - 1) * filter.PageSize).Take(filter.PageSize);
         }
     }
 }

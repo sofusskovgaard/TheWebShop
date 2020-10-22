@@ -1,0 +1,40 @@
+@model TheWebShop.Common.Dtos.ProductWithPicturesDto
+
+<div class="card@(Model.Highlight ? " shadow" : string.Empty)">
+    
+    @if (Model.Highlight)
+    {
+        <small class="position-absolute ml-auto text-white rounded p-1 shadow" style="top:.5rem;right:.5rem;z-index:2000;background:rgba(0,0,0,0.33)">Sponsored</small>
+    }
+
+    @if (Model.Pictures != null && Model.Pictures.Count > 0)
+    {
+        <img class="card-img-top" style="padding-bottom:calc(9/16 * 100%);background-image: url('data:@Model.Pictures[0].ContentType;base64,@Convert.ToBase64String(Model.Pictures[0].Picture)');background-position: center;background-repeat: no-repeat;background-size: cover;"/>
+    }
+    else
+    {
+        <img class="card-img-top" style="filter:grayscale(.66);padding-bottom:calc(9/16 * 100%);background-image: url('@Url.Content("images/default_drugs.jpg")');background-position: center;background-repeat: no-repeat;background-size: cover;"/>
+    }
+
+    <div class="card-body d-flex flex-column">
+        <a class="text-dark text-decoration-none" asp-page="/Products/Details" asp-route-entityId="@Model.EntityId">
+            @if (Model.Brand != null)
+            {
+                <h6 class="font-weight-normal m-0" style="font-family: 'Playfair Display'">@Model.Brand.Name</h6>
+            }
+        </a>
+
+        <a class="text-dark text-decoration-none" asp-page="/Products/Details" asp-route-entityId="@Model.EntityId">
+            <h5 class="card-title m-0" style="font-family: 'DM Serif Display'">@Model.Name</h5>
+        </a>
+
+        @if (Model.InStock)
+        {
+            <span class="text-monospace" style="font-size:0.9pc">@($"{Model.Price:C}")</span>
+        }
+        else
+        {
+            <small class="text-danger">Out of stock</small>
+        }
+    </div>
+</div>

@@ -4,6 +4,7 @@ using System.Text;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -14,6 +15,13 @@ namespace TheWebShop.Data
     /// </summary>
     public class DatabaseContextFactory : IDesignTimeDbContextFactory<DatabaseContext>, IDatabaseContextFactory
     {
+        private readonly IConfiguration _configuration;
+
+        public DatabaseContextFactory(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        
         /// <summary>
         /// Create a <see cref="DatabaseContext"/> using a <see cref="DbContext"/> factory.
         /// </summary>
@@ -22,13 +30,13 @@ namespace TheWebShop.Data
         public DatabaseContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-            optionsBuilder.UseSqlServer("Server=localhost;Database=TheWebShop;User Id=sa;Password=P@ssw0rd!;");
-                //.EnableSensitiveDataLogging(true)
-                //.UseLoggerFactory(new ServiceCollection()
-                //                      .AddLogging(builder => builder.AddConsole()
-                //                                      .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information))
-                //                      .BuildServiceProvider().GetService<ILoggerFactory>());
-
+            
+#if (DEBUG)
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DevelopmentDatabase"));
+#else
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("MainDatabase"));
+#endif
+            
             return new DatabaseContext(optionsBuilder.Options);
         }
     }

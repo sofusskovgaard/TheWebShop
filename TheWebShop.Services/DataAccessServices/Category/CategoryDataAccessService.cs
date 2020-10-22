@@ -103,7 +103,7 @@ namespace TheWebShop.Services.DataAccessServices.Category
             }
         }
 
-        public override async Task<int> CountEntitiesByFiter(CategoryFilter filter)
+        public override async Task<int> CountEntitiesByFilter(CategoryFilter filter)
         {
             return await _context.Categories
                 .AsNoTracking()

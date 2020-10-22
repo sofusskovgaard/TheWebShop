@@ -15,5 +15,7 @@ namespace TheWebShop.Data.Entities.ProductPicture
         string Caption { get; set; }
 
         byte[] Picture { get; set; }
+
+        string ContentType { get; set; }
     }
 }

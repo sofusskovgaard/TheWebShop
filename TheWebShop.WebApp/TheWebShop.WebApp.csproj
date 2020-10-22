@@ -5,8 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.1" />
+    <PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheWebShop.Data\TheWebShop.Data.csproj">
@@ -20,6 +29,32 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\Shared\Partials\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Partials\_FeaturedProducts.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Components\EntityTable\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Products\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Products\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Products\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Products\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\SeedDatabase.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Privacy.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Product.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\Partials\CookiePolicy.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\Partials\Footer.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\Partials\Hero.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\Partials\Navbar.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\Partials\Pagination.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\Partials\ProductCard.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,133 @@
+@page "/Products/{entityId}"
+@model DetailsModel
+
+@{
+    ViewData["Title"] = @Model.Product.Name;
+}
+
+<div class="row">
+    <div class="col-md-6">
+
+        @if (Model.Product.Pictures != null && Model.Product.Pictures.Count > 0)
+        {
+            @foreach (var item in Model.Product.Pictures)
+            {
+                <img class="w-100 mb-3 rounded" src="data:@item.ContentType;base64,@Convert.ToBase64String(item.Picture)"/>
+            }
+        }
+        else
+        {
+            <img class="w-100 rounded" src="@Url.Content("/images/default_drugs.jpg")"/>
+        }
+
+    </div>
+
+    <div class="col-md-6">
+        @if (Model.Product.Brand != null)
+        {
+            <h4 class="font-weight-normal m-0" style="font-family: 'Playfair Display'">@Model.Product.Brand.Name</h4>
+        }
+        <h1 class="mb-2" style="font-family: 'DM Serif Display'">@Model.Product.Name</h1>
+        <h5 class="text-monospace m-0">@($"{Model.Product.Price:C}") <small class="text-muted">eksl. moms</small></h5>
+
+        <a href="#reviewsContainer" class="d-inline-flex align-items-center my-3 text-decoration-none">
+            @{
+                var ratingFloored = Math.Floor(Model.Product.Rating);
+                var ratingRest = Model.Product.Rating - ratingFloored;
+            }
+
+            @for (var i = 0; i < 5; i++)
+            {
+                if (i < ratingFloored)
+                {
+                    <i class="fas fa-star fa-fw text-dark"></i>
+                }
+                else if (ratingRest > 0 && ratingRest > 0.4)
+                {
+                    <i class="fas fa-star-alt text-dark fa-fw"></i>
+                }
+                else
+                {
+                    <i class="far fa-star text-muted fa-fw"></i>
+                }
+            }
+
+            <span class="ml-1 text-monospace text-muted" style="font-size:0.85pc;line-height:0.85pc;font-style:italic;">(@(Model.Product.RatingCount))</span>
+
+        </a>
+
+        <div class="d-flex align-items-center mt-5 mb-3">
+
+            <div class="form-group mb-0 mr-2">
+                <input type="number" class="form-control"/>
+            </div>
+
+            @if (Model.Product.InStock)
+            {
+                <button class="btn btn-dark btn-block m-0">
+                    Add to basket
+                </button>
+            }
+            else
+            {
+                <button disabled class="btn btn-dark btn-block m-0">
+                    Out of stock
+                </button>
+            }
+
+        </div>
+
+        <abcdefghijklmopqrstuvxyzæøå>
+
+            <button class="btn btn-block p-0 text-left" type="button" data-toggle="collapse" data-target="#descriptionContainer" aria-expanded="false" aria-controls="descriptionContainer">
+                <h5 class="m-0">Description</h5>
+            </button>
+
+            <div class="collapse show" id="descriptionContainer">
+                <hr/>
+                <p class="text-justify">
+                    @Model.Product.Description
+                </p>
+            </div>
+
+            <button class="btn btn-block p-0 text-left" type="button" data-toggle="collapse" data-target="#reviewsContainer" aria-expanded="false" aria-controls="reviewsContainer">
+                <h5 class="m-0">Reviews</h5>
+            </button>
+
+            <div class="collapse show" id="reviewsContainer">
+                <hr/>
+                @foreach (var review in Model.Product.Reviews)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">@review.Title</h5>
+
+                                <div class="d-flex align-items-center">
+                                    @for (var i = 0; i < 5; i++)
+                                    {
+                                        if (i < review.Rating)
+                                        {
+                                            <i class="fas fa-star fa-fw"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="far fa-star fa-fw"></i>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+
+                            <p>@review.Comment</p>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+       </abcdefghijklmopqrstuvxyzæøå>
+
+    </div>
+</div>
+

@@ -93,7 +93,7 @@ namespace TheWebShop.Services.DataAccessServices.Review
             }
         }
 
-        public override async Task<int> CountEntitiesByFiter(ReviewFilter filter)
+        public override async Task<int> CountEntitiesByFilter(ReviewFilter filter)
         {
             return await _context.Reviews
                 .AsNoTracking()

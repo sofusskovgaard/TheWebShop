@@ -23,5 +23,7 @@ namespace TheWebShop.Services.EntityServices
         Task<T> Create<T>(TEntity entity) where T : BaseDto;
 
         Task<bool> DeleteById(int entityId);
+        
+        Task<int> CountEntitiesByFilter(TFilter filter);
     }
 }

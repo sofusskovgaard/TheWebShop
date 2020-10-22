@@ -12,6 +12,8 @@ namespace TheWebShop.Data.Entities.Product
     public interface IProductEntity : IBaseEntity
     {
         string Name { get; set; }
+        
+        string Description { get; set; }
 
         int? BrandEntityId { get; set; }
 
@@ -26,6 +28,12 @@ namespace TheWebShop.Data.Entities.Product
         double Rating { get; }
         
         int RatingCount { get; }
+        
+        bool Highlight { get; set; }
+        
+        bool InStock { get; }
+        
+        int Stock { get; set; }
         
         ICollection<ReviewEntity> Reviews { get; set; }
     }

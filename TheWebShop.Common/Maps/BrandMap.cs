@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 using AutoMapper;
-
-using TheWebShop.Common.Dtos.Brand;
+using TheWebShop.Common.Dtos;
 using TheWebShop.Data.Entities.Brand;
 
-namespace TheWebShop.Common.Dtos.Product
+namespace TheWebShop.Common.Maps
 {
-    public class ProductMap : Profile
+    public class BrandMap : Profile
     {
-        public ProductMap()
+        public BrandMap()
         {
             CreateMap<BrandEntity, BrandDto>()
                 .ReverseMap();

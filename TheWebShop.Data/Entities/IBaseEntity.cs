@@ -7,6 +7,8 @@ namespace TheWebShop.Data.Entities
     public interface IBaseEntity
     {
         int EntityId { get; set; }
+        
+        bool Active { get; set; }
 
         DateTime CreatedAt { get; set; }
 

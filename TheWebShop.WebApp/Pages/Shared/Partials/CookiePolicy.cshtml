@@ -1,0 +1,40 @@
+@{
+    var cookie = Context.Request.Cookies["COOKIES_ALLOWED"];
+}
+
+@if (cookie != "true")
+{
+    <div id="cookieWrapper" class="d-flex rounded shadow justify-content-between align-items-center px-5 py-4 bg-white position-fixed" style="left:1rem;right:1rem;bottom:1rem;z-index:2000">
+        <div>
+            <h3 class="m-0">Cookies!?</h3>
+            <p class="m-0">Do you wan't to allow us to store cookies in your browser?</p>
+
+        </div>
+        <div>
+            <button id="denyCookies" class="btn btn-light text-muted mr-2">No</button>
+            <button id="allowCookies" class="btn btn-primary btn-lg">Yes!</button>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function(){
+        $("#allowCookies").click(function() {
+            document.cookie = "COOKIES_ALLOWED=true;samesite=lax";
+            
+            $("#cookieWrapper").remove();
+        });
+        
+        $("#denyCookies").click(function() {
+            if (this.innerText == "No") {
+                this.innerText = "No...";
+            } else if (this.innerText == "No...") {
+                this.innerText = "Too bad.";
+            } else if (this.innerText == "Too bad.") {
+                this.innerText = "Bruh stop.";
+            } else {
+                location.href = "https://www.buzzfeed.com/andrewziegler/quiz-for-idiots";
+            }
+        });
+    });
+</script>

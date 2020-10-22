@@ -23,6 +23,6 @@ namespace TheWebShop.Services.DataAccessServices
 
         Task<bool> DeleteById(int entityId);
 
-        Task<int> CountEntitiesByFiter(TFilter filter);
+        Task<int> CountEntitiesByFilter(TFilter filter);
     }
 }

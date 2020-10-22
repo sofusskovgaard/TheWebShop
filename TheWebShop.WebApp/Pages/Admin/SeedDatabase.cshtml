@@ -1,0 +1,15 @@
+@page
+@model SeedDatabaseModel
+
+@{
+    ViewData["Title"] = "Seed Database";
+}
+
+<form method="post">
+    <h3>You're about to seed the database</h3>
+    <p>Are you sure you want to seed the database?</p>
+    <div class="d-flex">
+        <button type="button" class="btn btn-light btn-block mr-3" onclick="history.go(-1)">Cancel</button>
+        <button type="submit" class="btn btn-primary btn-block mt-0">Seed the database</button>
+    </div>
+</form>

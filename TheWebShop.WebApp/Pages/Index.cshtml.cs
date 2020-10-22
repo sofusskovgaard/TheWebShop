@@ -5,21 +5,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using TheWebShop.Common.Dtos;
+using TheWebShop.Common.Filters.Product;
+using TheWebShop.Common.Models.Components;
+using TheWebShop.Services.EntityServices.ProductService;
 
 namespace TheWebShop.WebApp.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly IProductService _productService;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IEnumerable<ProductWithPicturesDto> NewestProducts { get; set; }
+        
+        public IEnumerable<ProductWithPicturesDto> MostPopularProducts { get; set; }
+
+
+        public IndexModel(IProductService productService)
         {
-            _logger = logger;
+            _productService = productService;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-
+            NewestProducts = await _productService.GetByFilter<ProductWithPicturesDto>(new ProductFilter() { OrderBy = ProductOrderBy.CreatedAtDesc, PageSize = 4 });
+            
+            MostPopularProducts = await _productService.GetByFilter<ProductWithPicturesDto>(new ProductFilter() { OrderBy = ProductOrderBy.ReviewsDesc, PageSize = 4 });
+            
+            return Page();
         }
     }
 }

@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-using TheWebShop.Common.Dtos.Product;
+using TheWebShop.Common.Dtos;
 
-namespace TheWebShop.Common.Dtos.Brand
+namespace TheWebShop.Common.Dtos
 {
     public class BrandDto : BaseDto
     {
         public string Name { get; set; }
+        
+        public string Email { get; set; }
+        
+        public string Website { get; set; }
+        
+        public string PhoneNumber { get; set; }
     }
 
     public class BrandDetailedDto : BrandDto {

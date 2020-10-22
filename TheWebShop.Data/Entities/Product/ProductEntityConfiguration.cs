@@ -14,6 +14,8 @@ namespace TheWebShop.Data.Entities.Product
 
             builder.Ignore(x => x.RatingCount);
 
+            builder.Ignore(x => x.InStock);
+
             builder
                 .HasOne(x => x.Brand)
                 .WithMany(x => x.Products)
