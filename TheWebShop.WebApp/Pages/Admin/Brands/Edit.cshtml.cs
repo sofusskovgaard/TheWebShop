@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 using TheWebShop.Common.Dtos;
 using TheWebShop.Common.Filters.Brand;
+using TheWebShop.Common.Filters.Product;
 using TheWebShop.Common.Models.Forms;
 using TheWebShop.Common.Models.Product;
 using TheWebShop.Services.EntityServices.BrandService;

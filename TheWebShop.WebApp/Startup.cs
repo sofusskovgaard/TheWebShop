@@ -25,6 +25,7 @@ using TheWebShop.Services.DataAccessServices.Review;
 using TheWebShop.Services.EntityServices.BrandService;
 using TheWebShop.Services.EntityServices.CategoryService;
 using TheWebShop.Services.EntityServices.ProductService;
+using TheWebShop.Services.EntityServices.ReviewService;
 
 namespace TheWebShop.WebApp
 {
@@ -46,12 +47,12 @@ namespace TheWebShop.WebApp
             services.AddScoped<IDatabaseContextFactory, DatabaseContextFactory>();
             
             // MiniProfiler
-            //services.AddMiniProfiler(options =>
-            //{
-            //    options.SqlFormatter = new StackExchange.Profiling.SqlFormatters.VerboseSqlServerFormatter();
-            //    options.EnableMvcFilterProfiling = true;
-            //    options.EnableMvcViewProfiling = true;
-            //}).AddEntityFramework();
+//            services.AddMiniProfiler(options =>
+//            {
+//                options.SqlFormatter = new StackExchange.Profiling.SqlFormatters.VerboseSqlServerFormatter();
+//                options.EnableMvcFilterProfiling = true;
+//                options.EnableMvcViewProfiling = true;
+//            }).AddEntityFramework();
 
             //services.AddDistributedRedisCache(
             //    options =>
@@ -75,6 +76,7 @@ namespace TheWebShop.WebApp
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IReviewService, ReviewService>();
 
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
@@ -82,7 +84,7 @@ namespace TheWebShop.WebApp
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseMiniProfiler();
+//            app.UseMiniProfiler();
             
             if (env.IsDevelopment())
             {

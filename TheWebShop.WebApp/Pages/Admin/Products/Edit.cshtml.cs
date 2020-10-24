@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -27,6 +29,8 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
 
         private readonly IBrandService _brandService;
 
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         private readonly IMapper _mapper;
         
         public ProductDto Product { get; set; }
@@ -41,11 +45,12 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
         [BindProperty]
         public ProductFormModel FormModel { get; set; }
 
-        public EditModel(IProductService productService, IBrandService brandService, IMapper mapper)
+        public EditModel(IProductService productService, IBrandService brandService, IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
             _productService = productService;
             _brandService = brandService;
 
+            _webHostEnvironment = webHostEnvironment;
             _mapper = mapper;
         }
         
@@ -74,22 +79,26 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
             if (Pictures != null)
             {
                 var productPictures = new List<ProductPictureDto>();
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
                 
                 foreach (var picture in Pictures)
                 {
-                    await using var stream = new MemoryStream();
+//                    await using var stream = new MemoryStream();
+                    var filename = $"{DateTime.Now.ToUniversalTime()}-{Guid.NewGuid()}.{picture.FileName.Split(".").Last()}";
+                    var filePath = Path.Combine(uploadsFolder, filename);
+                    await using var fileStream = new FileStream(filePath, FileMode.Create);
 
-                    await picture.CopyToAsync(stream);
-                    
-                    productPictures.Add(new ProductPictureDto()
-                    {
-                        Picture = stream.ToArray(),
-                        Caption = picture.Name,
-                        ContentType = picture.ContentType
-                    });
+                    await picture.CopyToAsync(fileStream);
+
+//                    productPictures.Add(new ProductPictureDto()
+//                    {
+//                        Picture = stream.ToArray(),
+//                        Caption = picture.Name,
+//                        ContentType = picture.FileName
+//                    });
                 }
 
-                await _productService.UploadPictures(product.EntityId, productPictures);
+//                await _productService.UploadPictures(product.EntityId, productPictures);
             }
             
             return RedirectToPage();

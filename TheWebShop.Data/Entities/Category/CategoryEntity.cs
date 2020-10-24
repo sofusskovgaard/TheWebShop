@@ -20,8 +20,10 @@ namespace TheWebShop.Data.Entities.Category
 
         public ICollection<CategoryEntity> ChildCategories { get; set; }
 
+        public int ChildCategoriesCount => ChildCategories?.Count ?? 0;
+
         public ICollection<ProductCategoryEntity> Products { get; set; }
 
-        public int ProductCount => Products.Count;
+        public int ProductCount => Products?.Count ?? 0;
     }
 }

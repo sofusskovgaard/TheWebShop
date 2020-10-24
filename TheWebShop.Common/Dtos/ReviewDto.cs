@@ -13,6 +13,8 @@ namespace TheWebShop.Common.Dtos
         public string Title { get; set; }
 
         public string Comment { get; set; }
+        
+        public ProductDto Product { get; set; }
     }
 
     public class ReviewDetailedDto : ReviewDto

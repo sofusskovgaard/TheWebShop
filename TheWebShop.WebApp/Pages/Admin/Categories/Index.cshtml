@@ -1,20 +1,20 @@
-﻿@page
-@using TheWebShop.Common.Filters.Product
+@page
+@using TheWebShop.Common.Filters.Category
 @model IndexModel
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Categories";
 }
 
 <section class="position-sticky bg-white border-bottom" style="top: 0">
     <div class="d-flex align-items-center justify-content-between">
         <div>
-            <h3 class="m-0">Products</h3>
+            <h3 class="m-0">Categories</h3>
             <small class="d-block text-muted mb-2">Donec vitae erat hendrerit, hendrerit lectus at, faucibus odio.</small>
         </div>
-        
+
         <a class="btn btn-light btn-sm" asp-page="Create">
             <i class="fas fa-plus fa-fw mr-2"></i>
-            Product
+            Category
         </a>
     </div>
 
@@ -31,22 +31,12 @@
             </div>
         </div>
 
-        <div class="form-group mr-2">
-            <select class="custom-select" asp-for="@Model.Filter.Category" asp-items="@Model.Categories" onchange="this.form.submit()">
-                <option selected>All Categories</option>
-            </select>
-        </div>
-
-        <div class="form-group mr-2">
-            <select class="custom-select" asp-for="@Model.Filter.Brand" asp-items="@Model.Brands" onchange="this.form.submit()">
-                <option selected>All Brands</option>
-            </select>
-        </div>
-
         <div class="form-group">
-            <select class="custom-select" asp-for="@Model.Filter.OrderBy" asp-items="@(Html.GetEnumSelectList<ProductOrderBy>())" onchange="this.form.submit()">
+            <select class="custom-select" asp-for="@Model.Filter.OrderBy" asp-items="@(Html.GetEnumSelectList<CategoryOrderBy>())" onchange="this.form.submit()">
             </select>
         </div>
+        
+        <input type="hidden" asp-for="@Model.Filter.Parent" />
 
         <div class="d-flex align-items-center justify-content-center ml-auto mb-auto">
             <small class="mr-3 text-muted text-nowrap">Total results: @Model.TotalResults</small>
@@ -66,56 +56,45 @@
 
 <table class="table table-bordered table-striped table-hover border-top-0">
     <caption>
-        <small>Page results: @Model.Products.Count() - @Model.Stopwatch.ElapsedMilliseconds ms</small>
+        <small>Page results: @Model.Categories.Count() - @Model.Stopwatch.ElapsedMilliseconds ms</small>
     </caption>
     <thead>
     <tr>
 
-        <th class="position-sticky bg-white border-top-0 align-middle" style="top: 115px">EntityID</th>
-        <th class="position-sticky bg-white border-top-0 align-middle" style="top: 115px">Brand</th>
-        <th class="position-sticky bg-white border-top-0 align-middle" style="top: 115px">Name</th>
-        <th class="position-sticky bg-white border-top-0 align-middle" style="top: 115px">Price</th>
-        <th class="position-sticky bg-white border-top-0 align-middle" style="top: 115px">Stock</th>
-        <th class="position-sticky bg-white border-top-0 align-middle" style="top: 115px">Rating</th>
-        <th class="position-sticky bg-white border-top-0 align-middle" style="top: 115px">Ratings</th>
-        <th class="position-sticky bg-white border-top-0 align-middle text-center" style="top: 115px">Highligted</th>
-        <th class="position-sticky bg-white border-top-0 align-middle text-center" style="top: 115px">Active</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">EntityID</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">Name</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">Parent Category</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">Child Categories</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">Products</th>
+        <th class="position-sticky bg-white border-top-0 text-center" style="top: 115px">Active</th>
         <th class="position-sticky bg-white border-top-0" style="top: 115px"></th>
 
     </tr>
     </thead>
     <tbody>
 
-    @foreach (var entity in Model.Products)
+    @foreach (var entity in Model.Categories)
     {
         <tr>
             <td>@entity.EntityId</td>
+            <td>@entity.Name</td>
             <td>
-                @if (entity.Brand != null)
+                @if (entity.ParentCategory != null)
                 {
-                    <a asp-page="/Admin/Brands/Edit" asp-route-entityId="@entity.Brand.EntityId">
-                        @entity.Brand.Name
+                    <a asp-page="Edit" asp-route-entityId="@entity.ParentCategory.EntityId">
+                        @entity.ParentCategory.Name
                     </a>
                 }
             </td>
-            <td>@entity.Name</td>
-            <td>@($"{entity.Price:C}")</td>
-            <td>@entity.Stock</td>
-            <td>@($"{entity.Rating:F1}")</td>
             <td>
-                <a asp-page="/Admin/Reviews/Index" asp-route-Filter.Product="@entity.EntityId">
-                    @entity.RatingCount
+                <a asp-route-Filter.Parent="@entity.EntityId">
+                    @entity.ChildCategories.Count
                 </a>
             </td>
-            <td class="text-center">
-                @if (entity.Highlight)
-                {
-                    <i class="fas fa-check fa-fw"></i>
-                }
-                else
-                {
-                    <i class="fas fa-times fa-fw"></i>
-                }
+            <td>
+                <a asp-page="/Admin/Products/Index" asp-route-Filter.Category="@entity.EntityId">
+                    @entity.ProductCount
+                </a>
             </td>
             <td class="text-center">
                 @if (entity.Active)
@@ -127,7 +106,7 @@
                     <i class="fas fa-times fa-fw"></i>
                 }
             </td>
-            <td class="text-right">
+            <td class="text-right text-nowrap">
                 <a class="btn btn-light btn-sm mr-1" asp-page="Edit" asp-route-entityId="@entity.EntityId">
                     <i class="fas fa-edit fa-fw"></i>
                 </a>

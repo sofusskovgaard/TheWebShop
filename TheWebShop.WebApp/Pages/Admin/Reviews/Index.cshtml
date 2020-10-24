@@ -1,20 +1,20 @@
-﻿@page
-@using TheWebShop.Common.Filters.Brand
+@page
+@using TheWebShop.Common.Filters.Review
 @model IndexModel
 @{
-    ViewData["Title"] = "Brands";
+    ViewData["Title"] = "Reviews";
 }
 
 <section class="position-sticky bg-white border-bottom" style="top: 0">
     <div class="d-flex align-items-center justify-content-between">
         <div>
-            <h3 class="m-0">Brands</h3>
+            <h3 class="m-0">Reviews</h3>
             <small class="d-block text-muted mb-2">Donec vitae erat hendrerit, hendrerit lectus at, faucibus odio.</small>
         </div>
 
         <a class="btn btn-light btn-sm" asp-page="Create">
             <i class="fas fa-plus fa-fw mr-2"></i>
-            Brand
+            Review
         </a>
     </div>
 
@@ -32,9 +32,11 @@
         </div>
 
         <div class="form-group">
-            <select class="custom-select" asp-for="@Model.Filter.OrderBy" asp-items="@(Html.GetEnumSelectList<BrandOrderBy>())" onchange="this.form.submit()">
+            <select class="custom-select" asp-for="@Model.Filter.OrderBy" asp-items="@(Html.GetEnumSelectList<ReviewOrderBy>())" onchange="this.form.submit()">
             </select>
         </div>
+
+        <input type="hidden" asp-for="@Model.Filter.Product"/>
 
         <div class="d-flex align-items-center justify-content-center ml-auto mb-auto">
             <small class="mr-3 text-muted text-nowrap">Total results: @Model.TotalResults</small>
@@ -54,14 +56,16 @@
 
 <table class="table table-bordered table-striped table-hover border-top-0">
     <caption>
-        <small>Page results: @Model.Brands.Count() - @Model.Stopwatch.ElapsedMilliseconds ms</small>
+        <small>Page results: @Model.Reviews.Count() - @Model.Stopwatch.ElapsedMilliseconds ms</small>
     </caption>
     <thead>
     <tr>
 
         <th class="position-sticky bg-white border-top-0" style="top: 115px">EntityID</th>
-        <th class="position-sticky bg-white border-top-0" style="top: 115px">Name</th>
-        <th class="position-sticky bg-white border-top-0" style="top: 115px">Products</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">Title</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">Rating</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">Brand</th>
+        <th class="position-sticky bg-white border-top-0" style="top: 115px">Product</th>
         <th class="position-sticky bg-white border-top-0 text-center" style="top: 115px">Active</th>
         <th class="position-sticky bg-white border-top-0" style="top: 115px"></th>
 
@@ -69,14 +73,23 @@
     </thead>
     <tbody>
 
-    @foreach (var entity in Model.Brands)
+    @foreach (var entity in Model.Reviews)
     {
         <tr>
             <td>@entity.EntityId</td>
-            <td>@entity.Name</td>
-            <td>
-                <a asp-page="/Admin/Products/Index" asp-route-Filter.Brand="@entity.EntityId">
-                    @entity.ProductCount
+            <td>@entity.Title</td>
+            <td>@entity.Rating</td>
+            <td class="text-nowrap">
+                @if (@entity.Product.Brand != null)
+                {
+                    <a asp-page="/Admin/Brands/Edit" asp-route-entityId="@entity.Product.BrandEntityId">
+                        @entity.Product.Brand.Name
+                    </a>
+                }
+            </td>
+            <td class="text-nowrap">
+                <a asp-page="/Admin/Products/Edit" asp-route-entityId="@entity.Product.EntityId">
+                    @entity.Product.Name
                 </a>
             </td>
             <td class="text-center">
@@ -89,7 +102,7 @@
                     <i class="fas fa-times fa-fw"></i>
                 }
             </td>
-            <td class="text-right">
+            <td class="text-right text-nowrap">
                 <a class="btn btn-light btn-sm mr-1" asp-page="Edit" asp-route-entityId="@entity.EntityId">
                     <i class="fas fa-edit fa-fw"></i>
                 </a>

@@ -1,5 +1,6 @@
 using AutoMapper;
 using TheWebShop.Common.Dtos;
+using TheWebShop.Common.Models.Forms;
 using TheWebShop.Data.Entities.Review;
 
 namespace TheWebShop.Common.Maps
@@ -12,6 +13,12 @@ namespace TheWebShop.Common.Maps
                 .ReverseMap();
 
             CreateMap<ReviewEntity, ReviewDetailedDto>()
+                .ReverseMap();
+
+            CreateMap<ReviewDto, ReviewFormModel>()
+                .ReverseMap();
+
+            CreateMap<ReviewEntity, ReviewFormModel>()
                 .ReverseMap();
         }
     }

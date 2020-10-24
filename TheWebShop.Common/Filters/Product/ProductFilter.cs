@@ -6,13 +6,13 @@ namespace TheWebShop.Common.Filters.Product
 {
     public class ProductFilter : BaseFilter<ProductOrderBy>, IProductFilter
     {
-        public double? MinPrice { get; set; }
+        public decimal? MinPrice { get; set; }
 
-        public double? MaxPrice { get; set; }
+        public decimal? MaxPrice { get; set; }
 
-        public int? MinRating { get; set; }
+        public decimal? MinRating { get; set; }
 
-        public int? MaxRating { get; set; }
+        public decimal? MaxRating { get; set; }
 
         public int? Brand { get; set; }
         

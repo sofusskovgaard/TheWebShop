@@ -23,13 +23,13 @@ namespace TheWebShop.Data.Entities.Product
         public BrandEntity Brand { get; set; }
 
         [Column("decimal(5,2)")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public ICollection<ProductPictureEntity> Pictures { get; set; }
 
         public ICollection<ProductCategoryEntity> Categories { get; set; }
 
-        public double Rating => RatingCount > 0 ? Reviews.Sum(x => x.Rating) / RatingCount : 0;
+        public decimal Rating => RatingCount > 0 ? Decimal.Divide(Reviews.Sum(x => x.Rating), RatingCount) : 0;
 
         public int RatingCount => Reviews?.Count ?? 0;
         

@@ -38,6 +38,8 @@ namespace TheWebShop.WebApp.Pages.Products
             _productService = productService;
             _brandService = brandService;
             _categoryService = categoryService;
+
+            ps = 12;
         }
         
         public async Task<IActionResult> OnGetAsync()

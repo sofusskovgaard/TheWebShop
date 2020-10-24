@@ -50,17 +50,17 @@ namespace TheWebShop.Services.DataAccessServices.Category
         {
             var category = await _context.Categories.FirstOrDefaultAsync(x => x.EntityId == entityId);
 
-            foreach (var property in category.GetType().GetProperties())
+            foreach (var property in data.GetType().GetProperties())
             {
                 try
                 {
-                    var propertyValue = property.GetValue(category);
-                    var updatedProperty = data.GetType().GetProperty(property.Name);
-                    var updatedPropertyValue = updatedProperty.GetValue(data);
+                    var propertyValue = property.GetValue(data);
+                    var oldProperty = category.GetType().GetProperty(property.Name);
+                    var oldPropertyValue = oldProperty.GetValue(category);
 
-                    if (propertyValue != updatedPropertyValue)
+                    if (propertyValue != oldPropertyValue)
                     {
-                        property.SetValue(category, updatedPropertyValue);
+                        oldProperty.SetValue(category, propertyValue);
                     }
                 }
                 catch (NullReferenceException ex)

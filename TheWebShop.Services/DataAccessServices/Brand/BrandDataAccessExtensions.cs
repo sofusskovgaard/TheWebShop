@@ -28,22 +28,33 @@ namespace TheWebShop.Services.DataAccessServices.Brand
             this IQueryable<BrandEntity> entities, BrandFilter filter
         )
         {
+            var orderedEntities = entities.Where(x => x.Active);
+
+            if (filter.IncludeInactive)
+                orderedEntities = entities;
+            
             switch (filter.OrderBy)
             {
                 case BrandOrderBy.None:
-                    return entities;
+                    return orderedEntities;
 
                 case BrandOrderBy.NameAsc:
-                    return entities.OrderBy(x => x.Name);
+                    return orderedEntities.OrderBy(x => x.Name);
 
                 case BrandOrderBy.NameDesc:
-                    return entities.OrderByDescending(x => x.Name);
+                    return orderedEntities.OrderByDescending(x => x.Name);
 
                 case BrandOrderBy.ProductsAsc:
-                    return entities.OrderBy(x => x.Products.Count);
+                    return orderedEntities.OrderBy(x => x.Products.Count);
 
                 case BrandOrderBy.ProductsDesc:
-                    return entities.OrderByDescending(x => x.Products.Count);
+                    return orderedEntities.OrderByDescending(x => x.Products.Count);
+                
+                case BrandOrderBy.CreatedAtAsc:
+                    return orderedEntities.OrderBy(x => x.CreatedAt);
+
+                case BrandOrderBy.CreatedAtDesc:
+                    return orderedEntities.OrderByDescending(x => x.CreatedAt);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(filter.OrderBy), filter.OrderBy, null);

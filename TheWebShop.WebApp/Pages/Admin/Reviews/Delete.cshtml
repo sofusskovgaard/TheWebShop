@@ -1,0 +1,15 @@
+@page "/Admin/Reviews/{entityId}/Delete"
+@model DeleteModel
+
+@{
+    ViewData["Title"] = Model.Review.Title;
+}
+
+<form method="post">
+    <h3>You're about to delete <code>@Model.Review.Title</code></h3>
+    <p>Are you sure you want to delete <code>@Model.Review.Title</code>?</p>
+    <div class="d-flex">
+        <button type="button" class="btn btn-light btn-block mr-3" onclick="history.go(-1)">Cancel</button>
+        <button type="submit" class="btn btn-danger btn-block mt-0">Delete</button>
+    </div>
+</form>

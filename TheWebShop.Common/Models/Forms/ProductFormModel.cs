@@ -8,7 +8,7 @@ namespace TheWebShop.Common.Models.Product
         
         public int? BrandEntityId { get; set; }
         
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         
         public int Stock { get; set; }
         

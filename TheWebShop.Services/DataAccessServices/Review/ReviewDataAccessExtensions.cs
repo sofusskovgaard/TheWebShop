@@ -49,16 +49,27 @@ namespace TheWebShop.Services.DataAccessServices.Review
             this IQueryable<ReviewEntity> entities, ReviewFilter filter
         )
         {
+            var orderedProducts = entities.Where(x => x.Active);
+
+            if (filter.IncludeInactive)
+                orderedProducts = entities;
+                
             switch (filter.OrderBy)
             {
                 case ReviewOrderBy.None:
-                    return entities;
+                    return orderedProducts;
 
                 case ReviewOrderBy.RatingAsc:
-                    return entities.OrderBy(x => x.Rating);
+                    return orderedProducts.OrderBy(x => x.Rating).ThenByDescending(x => x.CreatedAt);
 
                 case ReviewOrderBy.RatingDesc:
-                    return entities.OrderByDescending(x => x.Rating);
+                    return orderedProducts.OrderByDescending(x => x.Rating).ThenByDescending(x => x.CreatedAt);
+                
+                case ReviewOrderBy.CreatedAtAsc:
+                    return orderedProducts.OrderBy(x => x.CreatedAt);
+
+                case ReviewOrderBy.CreatedAtDesc:
+                    return orderedProducts.OrderByDescending(x => x.CreatedAt);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(filter.OrderBy), filter.OrderBy, null);

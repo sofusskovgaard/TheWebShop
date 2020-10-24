@@ -17,6 +17,8 @@ namespace TheWebShop.Data.Entities.Category
         CategoryEntity ParentCategory { get; set; }
 
         ICollection<CategoryEntity> ChildCategories { get; set; }
+        
+        int ChildCategoriesCount { get; }
 
         ICollection<ProductCategoryEntity> Products { get; set; }
 

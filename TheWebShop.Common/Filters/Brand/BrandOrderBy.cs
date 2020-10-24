@@ -1,11 +1,21 @@
-﻿namespace TheWebShop.Common.Filters.Brand
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TheWebShop.Common.Filters.Brand
 {
     public enum BrandOrderBy
     {
         None,
+        [Display(Name = "A - Z")]
         NameAsc,
+        [Display(Name = "Z -A")]
         NameDesc,
+        [Display(Name = "Least Products")]
         ProductsAsc,
-        ProductsDesc
+        [Display(Name = "Most Products")]
+        ProductsDesc,
+        [Display(Name = "Oldest")]
+        CreatedAtAsc,
+        [Display(Name = "Newest")]
+        CreatedAtDesc
     }
 }

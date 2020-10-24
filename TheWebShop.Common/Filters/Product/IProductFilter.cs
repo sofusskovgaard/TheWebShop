@@ -2,13 +2,13 @@
 {
     public interface IProductFilter : IBaseFilter<ProductOrderBy>
     {
-        double? MinPrice { get; set; }
+        decimal? MinPrice { get; set; }
 
-        double? MaxPrice { get; set; }
+        decimal? MaxPrice { get; set; }
 
-        int? MinRating { get; set; }
+        decimal? MinRating { get; set; }
 
-        int? MaxRating { get; set; }
+        decimal? MaxRating { get; set; }
 
         int? Brand { get; set; }
         

@@ -54,7 +54,7 @@
                         <td class="text-right text-muted text-monospace" style="font-size:1.125pc"><small>eksl. moms</small> @($"{Model.Basket.Items.Sum(x => x.Quantity * x.Product.Price):c}")</td>
                     </tr>
                     <tr>
-                        <th colspan="3" class="text-right text-monospace" style="font-size:1.25pc"><small>inkl. moms</small> @($"{Model.Basket.Items.Sum(x => x.Quantity * x.Product.Price) * 1.25:c}")</th>
+                        <th colspan="3" class="text-right text-monospace" style="font-size:1.25pc"><small>inkl. moms</small> @($"{Model.Basket.Items.Sum(x => x.Quantity * x.Product.Price) * 1.25M:c}")</th>
                     </tr>
 
                     </tbody>

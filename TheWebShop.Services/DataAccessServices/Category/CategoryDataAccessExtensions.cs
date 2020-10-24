@@ -16,9 +16,10 @@ namespace TheWebShop.Services.DataAccessServices.Category
             var filteredEntities = entities;
 
             if (!string.IsNullOrEmpty(filter.Query))
-            {
                 filteredEntities = filteredEntities.Where(x => x.Name.ToLower().Contains(filter.Query.ToLower()));
-            }
+
+            if (filter.Parent != null)
+                filteredEntities = filteredEntities.Where(x => x.ParentCategoryEntityId == filter.Parent);
 
             return filteredEntities;
         }
@@ -27,22 +28,33 @@ namespace TheWebShop.Services.DataAccessServices.Category
             this IQueryable<CategoryEntity> entities, CategoryFilter filter
         )
         {
+            var orderedEntities = entities.Where(x => x.Active);
+
+            if (filter.IncludeInactive)
+                orderedEntities = entities;
+                
             switch (filter.OrderBy)
             {
                 case CategoryOrderBy.None:
-                    return entities;
+                    return orderedEntities;
 
                 case CategoryOrderBy.NameAsc:
-                    return entities.OrderBy(x => x.Name);
+                    return orderedEntities.OrderBy(x => x.Name);
 
                 case CategoryOrderBy.NameDesc:
-                    return entities.OrderByDescending(x => x.Name);
+                    return orderedEntities.OrderByDescending(x => x.Name);
 
                 case CategoryOrderBy.ProductsAsc:
-                    return entities.OrderBy(x => x.Products.Count);
+                    return orderedEntities.OrderBy(x => x.Products.Count);
 
                 case CategoryOrderBy.ProductsDesc:
-                    return entities.OrderByDescending(x => x.Products.Count);
+                    return orderedEntities.OrderByDescending(x => x.Products.Count);
+                
+                case CategoryOrderBy.CreatedAtAsc:
+                    return orderedEntities.OrderBy(x => x.CreatedAt);
+
+                case CategoryOrderBy.CreatedAtDesc:
+                    return orderedEntities.OrderByDescending(x => x.CreatedAt);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(filter.OrderBy), filter.OrderBy, null);

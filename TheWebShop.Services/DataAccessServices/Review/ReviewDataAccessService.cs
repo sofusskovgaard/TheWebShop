@@ -23,6 +23,8 @@ namespace TheWebShop.Services.DataAccessServices.Review
         {
             var review = await _context.Reviews
                 .AsNoTracking()
+                .Include(x => x.Product)
+                    .ThenInclude(x => x.Brand)
                 .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
             return review;
@@ -32,6 +34,8 @@ namespace TheWebShop.Services.DataAccessServices.Review
         {
             var reviews = await _context.Reviews
                 .AsNoTracking()
+                .Include(x => x.Product)
+                    .ThenInclude(x => x.Brand)
                 .FilterEntities(filter)
                 .OrderEntities(filter)
                 .PaginateEntities(filter)
@@ -80,7 +84,9 @@ namespace TheWebShop.Services.DataAccessServices.Review
         {
             try
             {
-                var review = await _context.Reviews.FirstOrDefaultAsync(x => x.EntityId == entityId);
+                var review = await _context.Reviews
+                    .Include(x => x.Product)
+                    .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
                 _context.Reviews.Remove(review);
                 await _context.SaveChangesAsync();

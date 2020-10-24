@@ -51,7 +51,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Brands
 
             await _brandService.Create<BrandDto>(entity);
 
-            return RedirectToPage("Index");
+            return RedirectToPage();
         }
     }
 }

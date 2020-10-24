@@ -19,13 +19,13 @@ namespace TheWebShop.Data.Entities.Product
 
         BrandEntity Brand { get; set; }
 
-        double Price { get; set; }
+        decimal Price { get; set; }
 
         ICollection<ProductPictureEntity> Pictures { get; set; }
 
         ICollection<ProductCategoryEntity> Categories { get; set; }
 
-        double Rating { get; }
+        decimal Rating { get; }
         
         int RatingCount { get; }
         

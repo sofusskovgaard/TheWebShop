@@ -43,3 +43,268 @@
     </div>
 
 </div>
+
+<section class="bg-white border-bottom mt-5">
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <h3 class="m-0">Reviews</h3>
+            <small class="d-block text-muted mb-2">Donec vitae erat hendrerit, hendrerit lectus at, faucibus odio.</small>
+        </div>
+
+        <a class="btn btn-light btn-sm" asp-page="/Admin/Reviews/Index">
+            View reviews
+            <i class="fas fa-arrow-right fa-fw ml-2"></i>
+        </a>
+    </div>
+</section>
+
+<table class="table table-bordered table-striped table-hover border-top-0">
+    <thead>
+    <tr>
+
+        <th>EntityID</th>
+        <th>Title</th>
+        <th>Rating</th>
+        <th>Brand</th>
+        <th>Product</th>
+        <th class="text-center">Active</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var entity in Model.Reviews)
+    {
+        <tr>
+            <td>@entity.EntityId</td>
+            <td>@entity.Title</td>
+            <td>@entity.Rating</td>
+            <td class="text-nowrap">
+                @if (@entity.Product.Brand != null)
+                {
+                    <a asp-page="/Admin/Brands/Edit" asp-route-entityId="@entity.Product.BrandEntityId">
+                        @entity.Product.Brand.Name
+                    </a>
+                }
+            </td>
+            <td class="text-nowrap">
+                <a asp-page="/Admin/Products/Edit" asp-route-entityId="@entity.Product.EntityId">
+                    @entity.Product.Name
+                </a>
+            </td>
+            <td class="text-center">
+                @if (entity.Active)
+                {
+                    <i class="fas fa-check fa-fw"></i>
+                }
+                else
+                {
+                    <i class="fas fa-times fa-fw"></i>
+                }
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+<section class="bg-white border-bottom mt-5">
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <h3 class="m-0">Products</h3>
+            <small class="d-block text-muted mb-2">Donec vitae erat hendrerit, hendrerit lectus at, faucibus odio.</small>
+        </div>
+
+        <a class="btn btn-light btn-sm" asp-page="/Admin/Products/Index">
+            View products
+            <i class="fas fa-arrow-right fa-fw ml-2"></i>
+        </a>
+    </div>
+</section>
+
+<table class="table table-bordered table-striped table-hover border-top-0">
+    <thead>
+    <tr>
+
+        <th>EntityID</th>
+        <th>Brand</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Rating</th>
+        <th>Ratings</th>
+        <th class="text-center">Highligted</th>
+        <th class="text-center">Active</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var entity in Model.Products)
+    {
+        <tr>
+            <td>@entity.EntityId</td>
+            <td>
+                @if (entity.Brand != null)
+                {
+                    <a asp-page="/Admin/Brands/Edit" asp-route-entityId="@entity.Brand.EntityId">
+                        @entity.Brand.Name
+                    </a>
+                }
+            </td>
+            <td>@entity.Name</td>
+            <td>@($"{entity.Price:C}")</td>
+            <td>@entity.Stock</td>
+            <td>@($"{entity.Rating:F1}")</td>
+            <td>
+                <a asp-page="/Admin/Reviews/Index" asp-route-Filter.Product="@entity.EntityId">
+                    @entity.RatingCount
+                </a>
+            </td>
+            <td class="text-center">
+                @if (entity.Highlight)
+                {
+                    <i class="fas fa-check fa-fw"></i>
+                }
+                else
+                {
+                    <i class="fas fa-times fa-fw"></i>
+                }
+            </td>
+            <td class="text-center">
+                @if (entity.Active)
+                {
+                    <i class="fas fa-check fa-fw"></i>
+                }
+                else
+                {
+                    <i class="fas fa-times fa-fw"></i>
+                }
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+<section class="bg-white border-bottom mt-5">
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <h3 class="m-0">Brands</h3>
+            <small class="d-block text-muted mb-2">Donec vitae erat hendrerit, hendrerit lectus at, faucibus odio.</small>
+        </div>
+
+        <a class="btn btn-light btn-sm" asp-page="/Admin/Brands/Index">
+            View brands
+            <i class="fas fa-arrow-right fa-fw ml-2"></i>
+        </a>
+    </div>
+</section>
+
+<table class="table table-bordered table-striped table-hover border-top-0">
+    <thead>
+    <tr>
+
+        <th>EntityID</th>
+        <th>Name</th>
+        <th>Products</th>
+        <th class="text-center">Active</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var entity in Model.Brands)
+    {
+        <tr>
+            <td>@entity.EntityId</td>
+            <td>@entity.Name</td>
+            <td>
+                <a asp-page="/Admin/Products/Index" asp-route-Filter.Brand="@entity.EntityId">
+                    @entity.ProductCount
+                </a>
+            </td>
+            <td class="text-center">
+                @if (entity.Active)
+                {
+                    <i class="fas fa-check fa-fw"></i>
+                }
+                else
+                {
+                    <i class="fas fa-times fa-fw"></i>
+                }
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+
+<section class="bg-white border-bottom mt-5">
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <h3 class="m-0">Categories</h3>
+            <small class="d-block text-muted mb-2">Donec vitae erat hendrerit, hendrerit lectus at, faucibus odio.</small>
+        </div>
+
+        <a class="btn btn-light btn-sm" asp-page="/Admin/Categories/Index">
+            View categories
+            <i class="fas fa-arrow-right fa-fw ml-2"></i>
+        </a>
+    </div>
+</section>
+
+<table class="table table-bordered table-striped table-hover border-top-0">
+    <thead>
+    <tr>
+
+        <th>EntityID</th>
+        <th>Name</th>
+        <th>Parent Category</th>
+        <th>Child Categories</th>
+        <th>Products</th>
+        <th class="text-center">Active</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var entity in Model.Categories)
+    {
+        <tr>
+            <td>@entity.EntityId</td>
+            <td>@entity.Name</td>
+            <td>
+                @if (entity.ParentCategory != null)
+                {
+                    <a asp-page="Edit" asp-route-entityId="@entity.ParentCategory.EntityId">
+                        @entity.ParentCategory.Name
+                    </a>
+                }
+            </td>
+            <td>
+                <a asp-route-Filter.Parent="@entity.EntityId">
+                    @entity.ChildCategories.Count
+                </a>
+            </td>
+            <td>
+                <a asp-page="/Admin/Products/Index" asp-route-Filter.Category="@entity.EntityId">
+                    @entity.ProductCount
+                </a>
+            </td>
+            <td class="text-center">
+                @if (entity.Active)
+                {
+                    <i class="fas fa-check fa-fw"></i>
+                }
+                else
+                {
+                    <i class="fas fa-times fa-fw"></i>
+                }
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>

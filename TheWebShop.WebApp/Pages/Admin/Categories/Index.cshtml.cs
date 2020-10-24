@@ -2,27 +2,28 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using TheWebShop.Common.Dtos;
-using TheWebShop.Common.Filters.Brand;
-using TheWebShop.Services.EntityServices.BrandService;
+using TheWebShop.Common.Filters.Category;
+using TheWebShop.Services.EntityServices.CategoryService;
 using TheWebShop.WebApp.Models;
 
-namespace TheWebShop.WebApp.Pages.Admin.Brands
+namespace TheWebShop.WebApp.Pages.Admin.Categories
 {
     public class IndexModel : BasePaginatedPage
     {
-        private readonly IBrandService _brandService;
+        private readonly ICategoryService _categoryService;
 
-        public IEnumerable<BrandDto> Brands { get; set; }
+        public IEnumerable<CategoryDto> Categories { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public BrandFilter Filter { get; set; }
+        public CategoryFilter Filter { get; set; }
 
         public Stopwatch Stopwatch { get; set; }
 
-        public IndexModel(IBrandService brandService)
+        public IndexModel(ICategoryService reviewService)
         {
-            _brandService = brandService;
+            _categoryService = reviewService;
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -34,8 +35,8 @@ namespace TheWebShop.WebApp.Pages.Admin.Brands
             Filter.PageSize = ps;
             Filter.IncludeInactive = true;
 
-            Brands = await _brandService.GetByFilter<BrandDto>(Filter);
-            TotalResults = await _brandService.CountEntitiesByFilter(Filter);
+            Categories = await _categoryService.GetByFilter<CategoryDto>(Filter);
+            TotalResults = await _categoryService.CountEntitiesByFilter(Filter);
 
             Stopwatch.Stop();
             return Page();

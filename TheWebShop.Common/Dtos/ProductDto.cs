@@ -9,6 +9,8 @@ namespace TheWebShop.Common.Dtos
     public class ProductDto : BaseDto
     {
         public string Name { get; set; }
+
+        public string NameWithBrand => Brand != null ? $"{Brand.Name} - {Name}" : Name;
         
         public string Description { get; set; }
         
@@ -16,9 +18,9 @@ namespace TheWebShop.Common.Dtos
         
         public int BrandEntityId { get; set; }
         
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
-        public double Rating { get; set; }
+        public decimal Rating { get; set; }
 
         public int RatingCount { get; set; }
         

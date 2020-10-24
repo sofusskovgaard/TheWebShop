@@ -211,7 +211,7 @@ namespace TheWebShop.Data
                         EntityId = 1,
                         Name = "Fortamol",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 1
@@ -221,7 +221,7 @@ namespace TheWebShop.Data
                         EntityId = 2,
                         Name = "Kodamid",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 2
@@ -231,7 +231,7 @@ namespace TheWebShop.Data
                         EntityId = 3,
                         Name = "Kodipar",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 2
@@ -241,7 +241,7 @@ namespace TheWebShop.Data
                         EntityId = 4,
                         Name = "Pinex",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 3
@@ -251,7 +251,7 @@ namespace TheWebShop.Data
                         EntityId = 5,
                         Name = "Pure Fentanyl",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu."
                     },
@@ -260,7 +260,7 @@ namespace TheWebShop.Data
                         EntityId = 6,
                         Name = "Contalgin",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 4
@@ -270,7 +270,7 @@ namespace TheWebShop.Data
                         EntityId = 7,
                         Name = "Depolan",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 1
@@ -280,7 +280,7 @@ namespace TheWebShop.Data
                         EntityId = 8,
                         Name = "Doltard",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 2
@@ -290,7 +290,7 @@ namespace TheWebShop.Data
                         EntityId = 9,
                         Name = "Oramorph",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 5
@@ -300,7 +300,7 @@ namespace TheWebShop.Data
                         EntityId = 10,
                         Name = "Sendolor",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 6
@@ -310,7 +310,7 @@ namespace TheWebShop.Data
                         EntityId = 11,
                         Name = "Dropizol",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 7
@@ -320,7 +320,7 @@ namespace TheWebShop.Data
                         EntityId = 12,
                         Name = "OxyContin",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 8
@@ -330,7 +330,7 @@ namespace TheWebShop.Data
                         EntityId = 13,
                         Name = "Oxynorm",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 8
@@ -340,7 +340,7 @@ namespace TheWebShop.Data
                         EntityId = 14,
                         Name = "Lindoxa",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 9
@@ -350,7 +350,7 @@ namespace TheWebShop.Data
                         EntityId = 15,
                         Name = "Marlodon",
                         Stock = 100,
-                        Price = 9.95,
+                        Price = 9.95M,
                         Description =
                             "Etiam in augue tempus, vulputate odio id, varius orci. Vivamus luctus, felis ut condimentum porta, nisi nisl aliquam nunc, a convallis sapien metus vitae turpis. Morbi auctor nunc dui, non tincidunt orci pharetra vitae. Morbi vel ex et ipsum iaculis mattis. Vivamus condimentum, nisi non pellentesque dapibus, enim est tristique odio, vel condimentum dolor leo eget ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam quis faucibus nibh. Aliquam vitae magna fermentum, auctor erat et, condimentum sem. Mauris convallis, felis eu fermentum elementum, sem metus rutrum massa, id placerat sem erat quis nunc. Vivamus efficitur lectus a tellus facilisis scelerisque. Mauris volutpat sapien vitae nibh faucibus, cursus varius lacus efficitur. Cras vel egestas ante. Aenean auctor eu est eu sollicitudin. In viverra posuere ipsum, quis tristique felis. Sed maximus lobortis lorem dictum efficitur. Vivamus mattis risus eget ante dignissim dictum non nec arcu.",
                         BrandEntityId = 10

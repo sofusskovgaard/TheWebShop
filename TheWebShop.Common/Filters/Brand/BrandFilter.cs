@@ -7,6 +7,8 @@
             OrderBy = BrandOrderBy.None;
         }
 
+        public bool IncludeInactive { get; set; } = false;
+        
         public override BrandOrderBy OrderBy { get; set; }
     }
 }

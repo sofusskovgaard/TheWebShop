@@ -13,6 +13,8 @@
 
         public int? Product { get; set; }
 
+        public bool IncludeInactive { get; set; } = false;
+
         public override ReviewOrderBy OrderBy { get; set; }
     }
 }

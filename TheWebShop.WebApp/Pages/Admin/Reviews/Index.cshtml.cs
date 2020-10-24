@@ -3,26 +3,26 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheWebShop.Common.Dtos;
-using TheWebShop.Common.Filters.Brand;
-using TheWebShop.Services.EntityServices.BrandService;
+using TheWebShop.Common.Filters.Review;
+using TheWebShop.Services.EntityServices.ReviewService;
 using TheWebShop.WebApp.Models;
 
-namespace TheWebShop.WebApp.Pages.Admin.Brands
+namespace TheWebShop.WebApp.Pages.Admin.Reviews
 {
     public class IndexModel : BasePaginatedPage
     {
-        private readonly IBrandService _brandService;
+        private readonly IReviewService _reviewService;
 
-        public IEnumerable<BrandDto> Brands { get; set; }
+        public IEnumerable<ReviewDto> Reviews { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public BrandFilter Filter { get; set; }
+        public ReviewFilter Filter { get; set; }
 
         public Stopwatch Stopwatch { get; set; }
 
-        public IndexModel(IBrandService brandService)
+        public IndexModel(IReviewService reviewService)
         {
-            _brandService = brandService;
+            _reviewService = reviewService;
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -34,8 +34,8 @@ namespace TheWebShop.WebApp.Pages.Admin.Brands
             Filter.PageSize = ps;
             Filter.IncludeInactive = true;
 
-            Brands = await _brandService.GetByFilter<BrandDto>(Filter);
-            TotalResults = await _brandService.CountEntitiesByFilter(Filter);
+            Reviews = await _reviewService.GetByFilter<ReviewDto>(Filter);
+            TotalResults = await _reviewService.CountEntitiesByFilter(Filter);
 
             Stopwatch.Stop();
             return Page();

@@ -57,16 +57,16 @@ namespace TheWebShop.WebApp.Pages.Admin
         public async Task<IActionResult> OnGetAsync()
         {
             ProductCount = await _productDataAccessService.CountEntitiesByFilter(new ProductFilter());
-            Products = await _productDataAccessService.GetByFilter(new ProductFilter());
+            Products = await _productDataAccessService.GetByFilter(new ProductFilter() { PageSize = 4, OrderBy = ProductOrderBy.CreatedAtAsc });
 
             BrandCount = await _brandDataAccessService.CountEntitiesByFilter(new BrandFilter());
-            Brands = await _brandDataAccessService.GetByFilter(new BrandFilter());
+            Brands = await _brandDataAccessService.GetByFilter(new BrandFilter() { PageSize = 4, OrderBy = BrandOrderBy.CreatedAtAsc });
 
             ReviewCount = await _reviewDataAccessService.CountEntitiesByFilter(new ReviewFilter());
-            Reviews = await _reviewDataAccessService.GetByFilter(new ReviewFilter());
+            Reviews = await _reviewDataAccessService.GetByFilter(new ReviewFilter() { PageSize = 4, OrderBy = ReviewOrderBy.CreatedAtAsc });
 
             CategoryCount = await _categoryDataAccessService.CountEntitiesByFilter(new CategoryFilter());
-            Categories = await _categoryDataAccessService.GetByFilter(new CategoryFilter());
+            Categories = await _categoryDataAccessService.GetByFilter(new CategoryFilter() { PageSize = 4, OrderBy = CategoryOrderBy.CreatedAtAsc });
 
             return Page();
         }
