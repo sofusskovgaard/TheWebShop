@@ -27,12 +27,40 @@
         @await Html.PartialAsync("./Partials/Hero")
     }
 
+    @* https://place-hold.it/120x600/aaa/fff *@
 
-    <div class="container py-5">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+    @if (ViewData["ShowLayoutAds"] is bool)
+    {
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-md-2">
+                    <div class="d-flex flex-column position-sticky" style="top: calc(calc(100vh - 720px) / 2)">
+                        <img class="ml-auto rounded" src="https://place-hold.it/120x720/aaa/fff.jpg" />
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <img class="ml-auto rounded w-100 mb-3" src="https://place-hold.it/1200x100/aaa/fff.jpg" />
+
+                    <main role="main">
+                        @RenderBody()
+                    </main>
+                </div>
+                <div class="col-md-2">
+                    <div class="d-flex flex-column position-sticky" style="top: calc(calc(100vh - 720px) / 2)">
+                        <img class="mr-auto rounded" src="https://place-hold.it/120x720/aaa/fff.jpg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container py-5">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    }
 
     @await Html.PartialAsync("Partials/CookiePolicy")
 
@@ -43,6 +71,6 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 
-@RenderSection("Scripts", required: false)
+@RenderSection("Scripts", false)
 </body>
 </html>

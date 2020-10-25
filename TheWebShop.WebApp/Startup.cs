@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StackExchange.Profiling.Storage;
-using TheWebShop.Common.Dtos;
-using TheWebShop.Common.Dtos;
+
+using StackExchange.Redis;
+
 using TheWebShop.Common.Maps;
 using TheWebShop.Data;
-using TheWebShop.Data.Entities.Brand;
-using TheWebShop.Data.Entities.Product;
 using TheWebShop.Services.CachingServices;
 using TheWebShop.Services.DataAccessServices.Brand;
 using TheWebShop.Services.DataAccessServices.Category;
@@ -45,7 +42,11 @@ namespace TheWebShop.WebApp
 
             // Entity Framework DbContext Factory
             services.AddScoped<IDatabaseContextFactory, DatabaseContextFactory>();
-            
+
+            services.AddScoped<IConnectionMultiplexer, ConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect("localhost"));
+
+            services.AddScoped<ICachingService, CachingService>();
+
             // MiniProfiler
 //            services.AddMiniProfiler(options =>
 //            {

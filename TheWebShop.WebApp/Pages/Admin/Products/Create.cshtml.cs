@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -24,6 +28,8 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
 
         private readonly IBrandService _brandService;
 
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         private readonly IMapper _mapper;
         
         public SelectList Brands { get; set; }
@@ -34,11 +40,12 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
         [BindProperty]
         public ProductFormModel FormModel { get; set; }
         
-        public CreateModel(IProductService productService, IBrandService brandService, IMapper mapper)
+        public CreateModel(IProductService productService, IBrandService brandService, IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
             _productService = productService;
             _brandService = brandService;
 
+            _webHostEnvironment = webHostEnvironment;
             _mapper = mapper;
         }
         
@@ -64,25 +71,28 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
             if (Pictures != null)
             {
                 var productPictures = new List<ProductPictureDto>();
-                
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+
                 foreach (var picture in Pictures)
                 {
-                    await using var stream = new MemoryStream();
+                    var uniqueName = $"{DateTime.Now.ToFileTimeUtc()}-{Guid.NewGuid()}".ToUpper();
+                    var filename = $"{uniqueName}.{picture.FileName.Split(".").Last()}";
+                    var filePath = Path.Combine(uploadsFolder, filename);
+                    await using var fileStream = new FileStream(filePath, FileMode.Create);
 
-                    await picture.CopyToAsync(stream);
-                    
+                    await picture.CopyToAsync(fileStream);
+
                     productPictures.Add(new ProductPictureDto()
                     {
-                        Picture = stream.ToArray(),
-                        Caption = picture.Name,
-                        ContentType = picture.ContentType
+                        Picture = filename,
+                        Caption = picture.Name
                     });
                 }
 
                 await _productService.UploadPictures(product.EntityId, productPictures);
             }
-            
-            return RedirectToPage("/Admin/Products/Index");   
+
+            return RedirectToPage("/Admin/Products/Edit", new { entityId = product.EntityId });   
         }
     }
 }

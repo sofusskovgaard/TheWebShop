@@ -9,7 +9,7 @@
 
     @if (Model.Pictures != null && Model.Pictures.Count > 0)
     {
-        <img class="card-img-top" style="padding-bottom:calc(9/16 * 100%);background-image: url('data:@Model.Pictures[0].ContentType;base64,@Convert.ToBase64String(Model.Pictures[0].Picture)');background-position: center;background-repeat: no-repeat;background-size: cover;"/>
+        <img class="card-img-top" style="padding-bottom:calc(9/16 * 100%);background-image: url('/images/@Model.Pictures[0].Picture');background-position: center;background-repeat: no-repeat;background-size: cover;"/>
     }
     else
     {

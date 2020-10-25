@@ -25,8 +25,7 @@ namespace TheWebShop.Data.Test.Entities.ProductPicture
                         {
                             new Data.Entities.ProductPicture.ProductPictureEntity()
                             {
-                                Caption = "Picture 1",
-                                Picture = new [] { Byte.MinValue, Byte.MinValue,  }
+                                Caption = "Picture 1"
                             }
                         }
                     }
@@ -43,13 +42,11 @@ namespace TheWebShop.Data.Test.Entities.ProductPicture
                 {
                     new Data.Entities.ProductPicture.ProductPictureEntity()
                     {
-                        Caption = "Picture 2",
-                        Picture = new []{ Byte.MinValue, Byte.MaxValue }
+                        Caption = "Picture 2"
                     },
                     new Data.Entities.ProductPicture.ProductPictureEntity()
                     {
-                        Caption = "Picture 3",
-                        Picture = new []{ Byte.MaxValue, Byte.MaxValue }
+                        Caption = "Picture 3"
                     }
                 };
                 

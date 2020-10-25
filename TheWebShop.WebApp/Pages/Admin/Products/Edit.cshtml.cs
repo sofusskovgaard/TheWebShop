@@ -83,22 +83,21 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
                 
                 foreach (var picture in Pictures)
                 {
-//                    await using var stream = new MemoryStream();
-                    var filename = $"{DateTime.Now.ToUniversalTime()}-{Guid.NewGuid()}.{picture.FileName.Split(".").Last()}";
+                    var uniqueName = $"{DateTime.Now.ToFileTimeUtc()}-{Guid.NewGuid()}".ToUpper();
+                    var filename = $"{uniqueName}.{picture.FileName.Split(".").Last()}";
                     var filePath = Path.Combine(uploadsFolder, filename);
                     await using var fileStream = new FileStream(filePath, FileMode.Create);
 
                     await picture.CopyToAsync(fileStream);
 
-//                    productPictures.Add(new ProductPictureDto()
-//                    {
-//                        Picture = stream.ToArray(),
-//                        Caption = picture.Name,
-//                        ContentType = picture.FileName
-//                    });
+                    productPictures.Add(new ProductPictureDto()
+                    {
+                        Picture = filename,
+                        Caption = picture.Name
+                    });
                 }
 
-//                await _productService.UploadPictures(product.EntityId, productPictures);
+                await _productService.UploadPictures(product.EntityId, productPictures);
             }
             
             return RedirectToPage();

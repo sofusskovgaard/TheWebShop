@@ -4,12 +4,13 @@
 
 @{
     ViewData["Title"] = "Products";
+    //ViewData["ShowLayoutAds"] = true;
 }
 <form>
     <div class="row">
         <div class="col-md-3">
 
-            <div class="d-flex flex-column position-sticky" style="top: 1rem">
+            <div class="d-flex flex-column">
 
                 @await Html.PartialAsync("Partials/SearchFilter")
 

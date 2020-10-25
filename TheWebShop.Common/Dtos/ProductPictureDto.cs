@@ -8,9 +8,7 @@ namespace TheWebShop.Common.Dtos
     {
         public string Caption { get; set; }
 
-        public byte[] Picture { get; set; }
-        
-        public string ContentType { get; set; }
+        public string Picture { get; set; }
     }
 
     public class ProductPictureDetailedDto : ProductPictureDto

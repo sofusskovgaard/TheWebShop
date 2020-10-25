@@ -8,25 +8,29 @@ using Microsoft.Extensions.Caching.Distributed;
 
 using Newtonsoft.Json;
 
+using StackExchange.Redis;
+
 using TheWebShop.Data.Entities;
 
 namespace TheWebShop.Services.CachingServices
 {
     public class CachingService : ICachingService
     {
-        private IDistributedCache _cache;
+        private IConnectionMultiplexer _connection;
 
-        public CachingService(IDistributedCache cache)
+        public CachingService(IConnectionMultiplexer connectionMultiplexer)
         {
-            _cache = cache;
+            _connection = connectionMultiplexer;
         }
 
         public async Task<T> Get<T>(string bucket, string key) where T : BaseEntity
         {
             try
             {
-                var json = await _cache.GetStringAsync($"{bucket}:{key}");
-                return JsonConvert.DeserializeObject<T>(json);
+                var db = _connection.GetDatabase();
+                var result = await db.StringGetAsync($"{bucket}:{key}");
+
+                return JsonConvert.DeserializeObject<T>(result);
             }
             catch
             {
@@ -38,14 +42,10 @@ namespace TheWebShop.Services.CachingServices
         {
             try
             {
+                var db = _connection.GetDatabase();
                 var json = JsonConvert.SerializeObject(entity);
 
-                var options = new DistributedCacheEntryOptions()
-                {
-                    AbsoluteExpirationRelativeToNow = new TimeSpan(7, 0, 0, 0)
-                };
-
-                await _cache.SetStringAsync($"{bucket}:{key}", json, options);
+                await db.StringSetAsync($"{bucket}:{key}", json, new TimeSpan(7, 0, 0, 0));
 
                 return JsonConvert.DeserializeObject<T>(json);
             }
@@ -59,14 +59,10 @@ namespace TheWebShop.Services.CachingServices
         {
             try
             {
+                var db = _connection.GetDatabase();
                 var json = JsonConvert.SerializeObject(entity);
 
-                var options = new DistributedCacheEntryOptions()
-                {
-                    AbsoluteExpirationRelativeToNow = lifeSpan
-                };
-
-                await _cache.SetStringAsync($"{bucket}:{key}", json, options);
+                await db.StringSetAsync($"{bucket}:{key}", json, lifeSpan);
 
                 return JsonConvert.DeserializeObject<T>(json);
             }

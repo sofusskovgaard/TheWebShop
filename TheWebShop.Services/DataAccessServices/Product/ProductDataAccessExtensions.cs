@@ -95,14 +95,16 @@ namespace TheWebShop.Services.DataAccessServices.Product
                         break;
 
                     case ProductOrderBy.ReviewsAsc:
-                        orderedEntities = orderedEntities
+                        orderedEntities = entities
+                            .OrderBy(x => x.Highlight)
                             .ThenBy(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
                             .ThenByDescending(x => x.Reviews.Count)
                             .ThenByDescending(x => x.CreatedAt);
                         break;
 
                     case ProductOrderBy.ReviewsDesc:
-                        orderedEntities = orderedEntities.ThenByDescending(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
+                        orderedEntities = orderedEntities
+                            .ThenByDescending(x => x.Reviews.Sum(r => r.Rating) / x.Reviews.Count)
                             .ThenByDescending(x => x.Reviews.Count)
                             .ThenByDescending(x => x.CreatedAt);
                         break;
