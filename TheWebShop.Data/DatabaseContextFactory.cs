@@ -15,11 +15,8 @@ namespace TheWebShop.Data
     /// </summary>
     public class DatabaseContextFactory : IDesignTimeDbContextFactory<DatabaseContext>, IDatabaseContextFactory
     {
-        private readonly IConfiguration _configuration;
-
-        public DatabaseContextFactory(IConfiguration configuration)
+        public DatabaseContextFactory()
         {
-            _configuration = configuration;
         }
         
         /// <summary>
@@ -30,13 +27,9 @@ namespace TheWebShop.Data
         public DatabaseContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-            
-#if (DEBUG)
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DevelopmentDatabase"));
-#else
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("MainDatabase"));
-#endif
-            
+
+            optionsBuilder.UseSqlServer("Server=localhost;Database=TheWebShop_TEST;User Id=sa;Password=P@ssw0rd!");
+
             return new DatabaseContext(optionsBuilder.Options);
         }
     }

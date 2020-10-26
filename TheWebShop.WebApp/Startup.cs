@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+
 using AutoMapper;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +17,8 @@ using StackExchange.Redis;
 
 using TheWebShop.Common.Maps;
 using TheWebShop.Data;
+using TheWebShop.Data.Entities.Role;
+using TheWebShop.Data.Entities.User;
 using TheWebShop.Services.CachingServices;
 using TheWebShop.Services.DataAccessServices.Brand;
 using TheWebShop.Services.DataAccessServices.Category;
@@ -40,32 +45,35 @@ namespace TheWebShop.WebApp
             // AutoMapper
             services.AddAutoMapper(typeof(BaseMap));
 
-            // Entity Framework DbContext Factory
+            // Entity Framework
+            services.AddDbContext<DatabaseContext>();
             services.AddScoped<IDatabaseContextFactory, DatabaseContextFactory>();
 
-            services.AddScoped<IConnectionMultiplexer, ConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect("localhost"));
+            services.AddIdentity<UserEntity, RoleEntity>(
+                options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                })
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
+            // Redis
+            services.AddScoped<IConnectionMultiplexer>(
+                x =>
+                    ConnectionMultiplexer.Connect(Configuration.GetConnectionString("DevelopmentCache"))
+            );
             services.AddScoped<ICachingService, CachingService>();
 
             // MiniProfiler
-//            services.AddMiniProfiler(options =>
-//            {
-//                options.SqlFormatter = new StackExchange.Profiling.SqlFormatters.VerboseSqlServerFormatter();
-//                options.EnableMvcFilterProfiling = true;
-//                options.EnableMvcViewProfiling = true;
-//            }).AddEntityFramework();
+            //services.AddMiniProfiler(options =>
+            //{
+            //    options.SqlFormatter = new StackExchange.Profiling.SqlFormatters.VerboseSqlServerFormatter();
+            //    options.EnableMvcFilterProfiling = true;
+            //    options.EnableMvcViewProfiling = true;
+            //}).AddEntityFramework();
 
-            //services.AddDistributedRedisCache(
-            //    options =>
-            //    {
-            //        var host = "localhost";
-            //        var port = 6379;
-
-            //        options.Configuration = $"{host}:{port}";
-            //    }
-            //);
-
-            //services.AddScoped<ICachingService, CachingService>();
+            services.AddScoped<ICachingService, CachingService>();
 
             // Configure data access services
             services.AddScoped<IProductDataAccessService, ProductDataAccessService>();
@@ -91,16 +99,13 @@ namespace TheWebShop.WebApp
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 //            app.UseMiniProfiler();
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                
+
                 app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                });
+                app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
             }
             else
             {
@@ -113,13 +118,16 @@ namespace TheWebShop.WebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapControllers();
+                }
+            );
         }
     }
 }

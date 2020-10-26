@@ -3,6 +3,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TheWebShop.Data.Entities;
@@ -12,13 +17,15 @@ using TheWebShop.Data.Entities.Product;
 using TheWebShop.Data.Entities.ProductCategory;
 using TheWebShop.Data.Entities.ProductPicture;
 using TheWebShop.Data.Entities.Review;
+using TheWebShop.Data.Entities.Role;
+using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.Data
 {
     /// <summary>
     /// DbContext used to connect to the database.
     /// </summary>
-    public class DatabaseContext : DbContext, IDatabaseContext
+    public class DatabaseContext : IdentityDbContext<UserEntity, RoleEntity, int>, IDatabaseContext
     {
         public DbSet<BrandEntity> Brands { get; set; }
         public DbSet<CategoryEntity> Categories { get; set; }
@@ -31,15 +38,18 @@ namespace TheWebShop.Data
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=localhost;Database=TheWebShop_DEV;User Id=sa;Password=P@ssw0rd!;");
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Ignore<BaseEntity>();
 
-#if DEBUG
-
             modelBuilder.SeedDatabase();
-
-#endif
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(DatabaseContext)));
         }
@@ -57,6 +67,56 @@ namespace TheWebShop.Data
         /// <returns></returns>
         public static ModelBuilder SeedDatabase(this ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserEntity>().HasData(
+                new UserEntity()
+                {
+                    Id = 1,
+                    Firstname = "Sofus",
+                    Lastname = "Skovgaad",
+                    UserName = "Admin",
+                    NormalizedUserName = "ADMIN",
+                    Email = "sofus.skovgaard@gmail.com",
+                    NormalizedEmail = "SOFUS.SKOVGAARD@GMAIL.COM",
+                    EmailConfirmed = true,
+                    LockoutEnabled = false,
+                    SecurityStamp = "6BCA3144-15C2-4388-B659-D44BC3BEF42D",
+                    ConcurrencyStamp = "97E1295B-6E41-4339-98FA-D32F2622CD53",
+                    PasswordHash = "AQAAAAEAACcQAAAAEEEhB7GdYLhcuYRFriWQCfYI3M9dOraYIbBaTJhNmJCaUXYV4S1Mp1FFsnjiLuaPwg=="
+                }
+            );
+
+            modelBuilder.Entity<RoleEntity>().HasData(
+                new RoleEntity()
+                {
+                    Id = 1,
+                    Name = "Admin",
+                    NormalizedName = "ADMIN",
+                    ConcurrencyStamp = "4278E7F7-BEB1-48F8-9787-41200ADAA3FD"
+                },
+                new RoleEntity()
+                {
+                    Id = 2,
+                    Name = "Employee",
+                    NormalizedName = "EMPLOYEE",
+                    ConcurrencyStamp = "B9BEC53D-7EC0-4FF0-9A99-8AD942284ADA"
+                },
+                new RoleEntity()
+                {
+                    Id = 3,
+                    Name = "Customer",
+                    NormalizedName = "CUSTOMER",
+                    ConcurrencyStamp = "2C09FA74-1E4F-4FBE-86E9-666F2FDC6672"
+                }
+            );
+
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(
+                new IdentityUserRole<int>()
+                {
+                    RoleId = 1,
+                    UserId = 1
+                }    
+            );
+
             #region Brands
 
             modelBuilder.Entity<BrandEntity>()

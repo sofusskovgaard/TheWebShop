@@ -23,6 +23,21 @@ namespace TheWebShop.Services.CachingServices
             _connection = connectionMultiplexer;
         }
 
+        public async Task<string> Get(string bucket, string key)
+        {
+            try
+            {
+                var db = _connection.GetDatabase();
+                var result = await db.StringGetAsync($"{bucket}:{key}");
+
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<T> Get<T>(string bucket, string key) where T : BaseEntity
         {
             try
@@ -38,12 +53,28 @@ namespace TheWebShop.Services.CachingServices
             }
         }
 
-        public async Task<T> Set<T>(T entity, string bucket, string key) where T : BaseEntity
+        public async Task<string> Set(string value, string bucket, string key)
         {
             try
             {
                 var db = _connection.GetDatabase();
-                var json = JsonConvert.SerializeObject(entity);
+
+                await db.StringSetAsync($"{bucket}:{key}", value, new TimeSpan(7, 0, 0, 0));
+
+                return value;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<T> Set<T>(T value, string bucket, string key) where T : BaseEntity
+        {
+            try
+            {
+                var db = _connection.GetDatabase();
+                var json = JsonConvert.SerializeObject(value);
 
                 await db.StringSetAsync($"{bucket}:{key}", json, new TimeSpan(7, 0, 0, 0));
 
@@ -55,12 +86,28 @@ namespace TheWebShop.Services.CachingServices
             }
         }
 
-        public async Task<T> Set<T>(T entity, string bucket, string key, TimeSpan lifeSpan) where T : BaseEntity
+        public async Task<string> Set(string value, string bucket, string key, TimeSpan lifeSpan)
         {
             try
             {
                 var db = _connection.GetDatabase();
-                var json = JsonConvert.SerializeObject(entity);
+
+                await db.StringSetAsync($"{bucket}:{key}", value, new TimeSpan(7, 0, 0, 0));
+
+                return value;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<T> Set<T>(T value, string bucket, string key, TimeSpan lifeSpan) where T : BaseEntity
+        {
+            try
+            {
+                var db = _connection.GetDatabase();
+                var json = JsonConvert.SerializeObject(value);
 
                 await db.StringSetAsync($"{bucket}:{key}", json, lifeSpan);
 
