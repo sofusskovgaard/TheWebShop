@@ -365,31 +365,6 @@ namespace TheWebShop.Data
                 .HasData(
                     new ReviewEntity()
                     {
-                        EntityId = 1,
-                        Rating = 1,
-                        Title = "Gave me titties",
-                        Comment = "This horrendous got me addicted and gave me man titties. 1 star!!!1!!11!!!",
-                        ProductEntityId = 1
-                    },
-                    new ReviewEntity()
-                    {
-                        EntityId = 2,
-                        Rating = 5,
-                        Title = "Gave me titties!",
-                        Comment = "These pills gave me titties. Yay!",
-                        ProductEntityId = 1
-                    },
-                    new ReviewEntity()
-                    {
-                        EntityId = 3,
-                        Rating = 3,
-                        Title = "Bad side effects, but great result",
-                        Comment =
-                            "This product got rid of the pain but gave me severe side effects. Like waking up in a cold sweat.",
-                        ProductEntityId = 1
-                    },
-                    new ReviewEntity()
-                    {
                         EntityId = 4, Rating = 5,
                         Title = "velit in aliquet lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu",
                         Comment =

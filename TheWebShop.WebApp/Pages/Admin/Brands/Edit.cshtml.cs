@@ -52,7 +52,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Brands
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return await OnGetAsync(entityId);
             }
 
             var brand = await _brandService.UpdateById<BrandDto>(entityId, FormModel);

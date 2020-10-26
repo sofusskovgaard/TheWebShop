@@ -44,49 +44,55 @@ namespace TheWebShop.WebApp.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var basketCookie = Request.Cookies["BASKET"];
-
-            if (basketCookie != null)
-                Basket = JsonConvert.DeserializeObject<Common.Models.BasketModel>(basketCookie);
-
-            foreach (var item in Request.Form)
+            return await Task.Run(() =>
             {
+                var basketCookie = Request.Cookies["BASKET"];
 
-                if (!int.TryParse(item.Key, out int key) || !int.TryParse(item.Value, out int value)) 
-                    continue;
+                if (basketCookie != null)
+                    Basket = JsonConvert.DeserializeObject<Common.Models.BasketModel>(basketCookie);
 
-                var itemIndex = Basket.Items.FindIndex(x => x.ProductEntityId == key);
-                
-                if (itemIndex < 0)
-                    continue;
-
-                if (value == 0)
+                foreach (var item in Request.Form)
                 {
-                    Basket.Items.RemoveAt(itemIndex);
-                }
-                else
-                {
-                    Basket.Items[itemIndex].Quantity = Convert.ToInt32(item.Value);
-                }
-            }
 
-            Response.Cookies.Append("BASKET", JsonConvert.SerializeObject(Basket));
+                    if (!int.TryParse(item.Key, out int key) || !int.TryParse(item.Value, out int value))
+                        continue;
 
-            return RedirectToPage();
+                    var itemIndex = Basket.Items.FindIndex(x => x.ProductEntityId == key);
+
+                    if (itemIndex < 0)
+                        continue;
+
+                    if (value == 0)
+                    {
+                        Basket.Items.RemoveAt(itemIndex);
+                    }
+                    else
+                    {
+                        Basket.Items[itemIndex].Quantity = Convert.ToInt32(item.Value);
+                    }
+                }
+
+                Response.Cookies.Append("BASKET", JsonConvert.SerializeObject(Basket));
+
+                return RedirectToPage();
+            });
         }
 
         public async Task<IActionResult> OnPostRemoveProduct()
         {
-            var basketCookie = Request.Cookies["BASKET"];
+            return await Task.Run(() =>
+            {
+                var basketCookie = Request.Cookies["BASKET"];
 
-            if (basketCookie != null)
-                Basket = JsonConvert.DeserializeObject<Common.Models.BasketModel>(basketCookie);
+                if (basketCookie != null)
+                    Basket = JsonConvert.DeserializeObject<Common.Models.BasketModel>(basketCookie);
 
-            Basket.Items.RemoveAt(Basket.Items.FindIndex(x => x.ProductEntityId == ProductToBeRemoved));
+                Basket.Items.RemoveAt(Basket.Items.FindIndex(x => x.ProductEntityId == ProductToBeRemoved));
 
-            Response.Cookies.Append("BASKET", JsonConvert.SerializeObject(Basket));
+                Response.Cookies.Append("BASKET", JsonConvert.SerializeObject(Basket));
 
-            return RedirectToPage();
+                return RedirectToPage();
+            });
         }
     }
 }

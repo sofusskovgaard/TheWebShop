@@ -22,7 +22,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Reviews
 
         private readonly IMapper _mapper;
 
-        public ReviewDto Review { get; set; }
+        public ReviewDetailedDto Review { get; set; }
         
         public SelectList Products { get; set; }
 
@@ -39,7 +39,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Reviews
 
         public async Task<IActionResult> OnGetAsync([FromRoute] int entityId)
         {
-            Review = await _reviewService.GetById<ReviewDto>(entityId);
+            Review = await _reviewService.GetById<ReviewDetailedDto>(entityId);
             var _products = await _productService.GetByFilter<ProductDto>(new ProductFilter() { IncludeInactive = true, PrioritizeHighlighted = false });
             Products = new SelectList(_products.OrderBy(x => x.NameWithBrand), nameof(ProductDto.EntityId), nameof(ProductDto.NameWithBrand));
 

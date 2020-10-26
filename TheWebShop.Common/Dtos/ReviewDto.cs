@@ -14,11 +14,11 @@ namespace TheWebShop.Common.Dtos
 
         public string Comment { get; set; }
         
-        public ProductDto Product { get; set; }
+        public int ProductEntityId { get; set; }
     }
 
     public class ReviewDetailedDto : ReviewDto
     {
-
+        public ProductDto Product { get; set; }
     }
 }

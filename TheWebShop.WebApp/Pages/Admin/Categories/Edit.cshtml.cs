@@ -46,7 +46,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Categories
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return await OnGetAsync(entityId);
             }
 
             await _categoryService.UpdateById<CategoryDto>(entityId, FormModel);

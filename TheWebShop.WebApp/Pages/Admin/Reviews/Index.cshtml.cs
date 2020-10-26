@@ -13,7 +13,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Reviews
     {
         private readonly IReviewService _reviewService;
 
-        public IEnumerable<ReviewDto> Reviews { get; set; }
+        public IEnumerable<ReviewDetailedDto> Reviews { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public ReviewFilter Filter { get; set; }
@@ -34,7 +34,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Reviews
             Filter.PageSize = ps;
             Filter.IncludeInactive = true;
 
-            Reviews = await _reviewService.GetByFilter<ReviewDto>(Filter);
+            Reviews = await _reviewService.GetByFilter<ReviewDetailedDto>(Filter);
             TotalResults = await _reviewService.CountEntitiesByFilter(Filter);
 
             Stopwatch.Stop();

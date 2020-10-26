@@ -81,6 +81,11 @@ namespace TheWebShop.WebApp
 
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
+
+            services.AddControllers();
+
+            // Swagger
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -90,6 +95,12 @@ namespace TheWebShop.WebApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                });
             }
             else
             {
@@ -104,7 +115,11 @@ namespace TheWebShop.WebApp
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+            });
         }
     }
 }

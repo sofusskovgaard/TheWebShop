@@ -61,7 +61,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return await OnGetAsync();
             }
 
             var entity = _mapper.Map<ProductEntity>(FormModel);

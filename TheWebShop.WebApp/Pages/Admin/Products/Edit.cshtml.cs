@@ -71,7 +71,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Products
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return await OnGetAsync(entityId);
             }
 
             var product = await _productService.UpdateById<ProductDto>(entityId, FormModel);

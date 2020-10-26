@@ -42,7 +42,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Categories
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return await OnGetAsync(entityId);
             }
 
             var entity = _mapper.Map<CategoryEntity>(FormModel);

@@ -31,11 +31,10 @@ namespace TheWebShop.WebApp.Pages.Admin.Brands
         public CreateModel(IBrandService brandService, IMapper mapper)
         {
             _brandService = brandService;
-
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
             return Page();
         }
@@ -44,7 +43,7 @@ namespace TheWebShop.WebApp.Pages.Admin.Brands
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return OnGet();
             }
 
             var entity = _mapper.Map<BrandEntity>(FormModel);

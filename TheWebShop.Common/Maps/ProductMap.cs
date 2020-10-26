@@ -1,6 +1,7 @@
 using System.Linq;
 using AutoMapper;
 using TheWebShop.Common.Dtos;
+using TheWebShop.Common.Models.Commands;
 using TheWebShop.Common.Models.Product;
 using TheWebShop.Data.Entities.Product;
 
@@ -20,6 +21,9 @@ namespace TheWebShop.Common.Maps
 
             CreateMap<ProductEntity, ProductDetailedDto>()
                 .ForMember(model => model.Categories, expression => expression.MapFrom(model => model.Categories.Select(x => x.Category)))
+                .ReverseMap();
+
+            CreateMap<ProductEntity, ProductCommand>()
                 .ReverseMap();
             
             CreateMap<ProductDto, ProductFormModel>()
