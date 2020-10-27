@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TheWebShop.Common.Filters.Brand;
@@ -20,6 +21,7 @@ using TheWebShop.WebApp.Models;
 
 namespace TheWebShop.WebApp.Pages.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly IProductDataAccessService _productDataAccessService;

@@ -1,22 +1,13 @@
 ﻿@using Newtonsoft.Json
 @using TheWebShop.Common.Models
-@{
-    var basketCookie = Context.Request.Cookies["BASKET"];
-    BasketModel basket = new BasketModel();
-
-    if (basketCookie != null)
-    {
-        basket = JsonConvert.DeserializeObject<BasketModel>(basketCookie);
-    }
-
-    ViewData["basket"] = basket;
-}
+@using TheWebShop.Services.BasketService
+@inject IBasketService BasketService;
 
 <ul class="navbar-nav">
     <li class="nav-item">
         <a class="nav-link" asp-page="/Basket">
             <i class="fas fa-shopping-cart fa-fw"></i>
-            <span class="badge badge-light">@basket.Items.Sum(x => x.Quantity)</span>
+            <span class="badge badge-light">@await BasketService.GetBasketCount(Context)</span>
         </a>
     </li>
 </ul>

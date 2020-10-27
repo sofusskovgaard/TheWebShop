@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 using Newtonsoft.Json;
-
 using TheWebShop.Common.Dtos;
 using TheWebShop.Common.Models;
+using TheWebShop.Services.BasketService;
 using TheWebShop.Services.EntityServices.ProductService;
 
 namespace TheWebShop.WebApp.Pages
@@ -17,22 +16,21 @@ namespace TheWebShop.WebApp.Pages
     {
         private readonly IProductService _productService;
 
+        private readonly IBasketService _basketService;
+
         public Common.Models.BasketModel Basket { get; set; } = new Common.Models.BasketModel();
 
-        [BindProperty]
-        public int ProductToBeRemoved { get; set; }
+        [BindProperty] public int ProductToBeRemoved { get; set; }
 
-        public BasketModel(IProductService productService)
+        public BasketModel(IProductService productService, IBasketService basketService)
         {
             _productService = productService;
+            _basketService = basketService;
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var basketCookie = Request.Cookies["BASKET"];
-            
-            if (basketCookie != null)
-                Basket = JsonConvert.DeserializeObject<Common.Models.BasketModel>(basketCookie);
+            Basket = await _basketService.GetBasket(HttpContext);
 
             foreach (var item in Basket.Items)
             {
@@ -44,55 +42,14 @@ namespace TheWebShop.WebApp.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            return await Task.Run(() =>
-            {
-                var basketCookie = Request.Cookies["BASKET"];
-
-                if (basketCookie != null)
-                    Basket = JsonConvert.DeserializeObject<Common.Models.BasketModel>(basketCookie);
-
-                foreach (var item in Request.Form)
-                {
-
-                    if (!int.TryParse(item.Key, out int key) || !int.TryParse(item.Value, out int value))
-                        continue;
-
-                    var itemIndex = Basket.Items.FindIndex(x => x.ProductEntityId == key);
-
-                    if (itemIndex < 0)
-                        continue;
-
-                    if (value == 0)
-                    {
-                        Basket.Items.RemoveAt(itemIndex);
-                    }
-                    else
-                    {
-                        Basket.Items[itemIndex].Quantity = Convert.ToInt32(item.Value);
-                    }
-                }
-
-                Response.Cookies.Append("BASKET", JsonConvert.SerializeObject(Basket));
-
-                return RedirectToPage();
-            });
+            Basket = await _basketService.EditBasket(HttpContext, Request.Form);
+            return RedirectToPage();
         }
-
-        public async Task<IActionResult> OnPostRemoveProduct()
+        
+        public async Task<IActionResult> OnPostClearBasketAsync()
         {
-            return await Task.Run(() =>
-            {
-                var basketCookie = Request.Cookies["BASKET"];
-
-                if (basketCookie != null)
-                    Basket = JsonConvert.DeserializeObject<Common.Models.BasketModel>(basketCookie);
-
-                Basket.Items.RemoveAt(Basket.Items.FindIndex(x => x.ProductEntityId == ProductToBeRemoved));
-
-                Response.Cookies.Append("BASKET", JsonConvert.SerializeObject(Basket));
-
-                return RedirectToPage();
-            });
+            await _basketService.ClearBasket(HttpContext);
+            return RedirectToPage();
         }
     }
 }

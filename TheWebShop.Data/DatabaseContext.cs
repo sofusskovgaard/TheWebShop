@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using TheWebShop.Data.Entities;
 using TheWebShop.Data.Entities.Brand;
 using TheWebShop.Data.Entities.Category;
+using TheWebShop.Data.Entities.Order;
 using TheWebShop.Data.Entities.Product;
 using TheWebShop.Data.Entities.ProductCategory;
 using TheWebShop.Data.Entities.ProductPicture;
@@ -27,6 +28,7 @@ namespace TheWebShop.Data
     /// </summary>
     public class DatabaseContext : IdentityDbContext<UserEntity, RoleEntity, int>, IDatabaseContext
     {
+        public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<BrandEntity> Brands { get; set; }
         public DbSet<CategoryEntity> Categories { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
@@ -72,9 +74,9 @@ namespace TheWebShop.Data
                 {
                     Id = 1,
                     Firstname = "Sofus",
-                    Lastname = "Skovgaad",
-                    UserName = "Admin",
-                    NormalizedUserName = "ADMIN",
+                    Lastname = "Skovgaard",
+                    UserName = "sofus.skovgaard@gmail.com",
+                    NormalizedUserName = "SOFUS.SKOVGAARD@GMAIL.COM",
                     Email = "sofus.skovgaard@gmail.com",
                     NormalizedEmail = "SOFUS.SKOVGAARD@GMAIL.COM",
                     EmailConfirmed = true,

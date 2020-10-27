@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 using TheWebShop.Common.Dtos;
 using TheWebShop.Common.Models;
+using TheWebShop.Services.BasketService;
 using TheWebShop.Services.EntityServices.ProductService;
 
 namespace TheWebShop.WebApp.Pages.Products
@@ -17,6 +18,7 @@ namespace TheWebShop.WebApp.Pages.Products
     public class DetailsModel : PageModel
     {
         private readonly IProductService _productService;
+        private readonly IBasketService _basketService;
 
         private readonly IMapper _mapper;
 
@@ -25,10 +27,10 @@ namespace TheWebShop.WebApp.Pages.Products
         [BindProperty(SupportsGet = true)]
         public int Quantity { get; set; } = 1;
 
-        public DetailsModel(IProductService productService, IMapper mapper)
+        public DetailsModel(IProductService productService, IBasketService basketService, IMapper mapper)
         {
             _productService = productService;
-
+            _basketService = basketService;
             _mapper = mapper;
         }
 
@@ -41,31 +43,10 @@ namespace TheWebShop.WebApp.Pages.Products
 
         public async Task<IActionResult> OnPostAsync([FromRoute] int entityId)
         {
-            return await Task.Run(
-                       () =>
-                       {
-                           var basketCookie = Request.Cookies["BASKET"];
-                           var basket = new Common.Models.BasketModel();
+            Product = await _productService.GetById<ProductDetailedDto>(entityId);
+            await _basketService.AddToBasket(HttpContext, Product, Quantity);
 
-                           if (basketCookie != null) basket =
-                               JsonConvert.DeserializeObject<Common.Models.BasketModel>(basketCookie);
-
-                           var basketSearch = basket.Items.FirstOrDefault(x => x.ProductEntityId == entityId);
-
-                           if (basketSearch != null)
-                           {
-                               basketSearch.Quantity += Quantity;
-                           }
-                           else
-                           {
-                               basket.Items.Add(new BasketItemModel() { ProductEntityId = entityId, Quantity = Quantity });
-                           }
-
-                           Response.Cookies.Append("BASKET", JsonConvert.SerializeObject(basket));
-
-                           return RedirectToPage(new {entityId});
-                       }
-                   );
+            return RedirectToPage(new {entityId});
         }
     }
 }
