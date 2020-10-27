@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace TheWebShop.WebApp.Pages.Errors
 {
@@ -10,9 +10,9 @@ namespace TheWebShop.WebApp.Pages.Errors
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
-        private readonly ILogger<NotFoundModel> _logger;
+        private readonly ILogger _logger;
 
-        public NotFoundModel(ILogger<NotFoundModel> logger)
+        public NotFoundModel(ILogger logger)
         {
             _logger = logger;
         }

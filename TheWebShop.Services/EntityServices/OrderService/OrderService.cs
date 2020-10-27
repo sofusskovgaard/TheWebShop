@@ -7,7 +7,7 @@ using TheWebShop.Services.DataAccessServices.Order;
 
 namespace TheWebShop.Services.EntityServices.OrderService
 {
-    public class OrderService : BaseEntityService<OrderEntity, OrderFilter, OrderOrderBy>
+    public class OrderService : BaseEntityService<OrderEntity, OrderFilter, OrderOrderBy>, IOrderService
     {
         private readonly IOrderDataAccessService _orderDataAccessService;
         

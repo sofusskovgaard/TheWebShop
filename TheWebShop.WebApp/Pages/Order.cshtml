@@ -1,0 +1,50 @@
+﻿@page "{OrderId:int}"
+@model OrderModel
+@{
+}
+
+<div class="row mb-5">
+    <div class="col-md-3">
+        <strong>WE <i class="fas fa-heart text-danger"></i> DRUGS</strong>
+        <div>Skovvej 20, 244</div>
+        <div>6400 Sønderborg</div>
+        <div>contact@welovedrugs.com</div>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Brand</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Order.Items)
+    {
+        <tr>
+            <td>@item.Product.Brand.Name</td>
+            <td>@item.Product.Name</td>
+            <td>@item.PricePerProduct</td>
+            <td>@item.Quantity</td>
+            <td>@item.Total</td>
+        </tr>
+    }
+    <tr>
+        <td rowspan="2" class="text-center text-monospace align-middle text-muted" style="font-size: 1.125pc">
+            @Model.Order.TotalQuantity
+        </td>
+        <td colspan="4" class="text-muted text-right text-monospace" style="font-size: 1.125pc">
+            <small>eksl. moms</small> @($"{Model.Order.Total:C}")
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-right text-monospace" style="font-size: 1.25pc">
+            <small>inkl. moms</small> @($"{(Model.Order.Total + Model.Order.TotalTax):C}")
+        </td>
+    </tr>
+    </tbody>
+</table>

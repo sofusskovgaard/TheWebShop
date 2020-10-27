@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account.Manage
@@ -15,11 +15,11 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
     public class DownloadPersonalDataModel : PageModel
     {
         private readonly UserManager<UserEntity> _userManager;
-        private readonly ILogger<DownloadPersonalDataModel> _logger;
+        private readonly ILogger _logger;
 
         public DownloadPersonalDataModel(
             UserManager<UserEntity> userManager,
-            ILogger<DownloadPersonalDataModel> logger)
+            ILogger logger)
         {
             _userManager = userManager;
             _logger = logger;
@@ -33,7 +33,7 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            _logger.LogInformation("User with ID '{UserId}' asked for their personal data.", _userManager.GetUserId(User));
+            _logger.Information("User with ID '{UserId}' asked for their personal data.", _userManager.GetUserId(User));
 
             // Only include personal data for download
             var personalData = new Dictionary<string, string>();

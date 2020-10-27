@@ -15,7 +15,10 @@ namespace TheWebShop.Data.Entities.OrderItem
                 .WithMany(x => x.Items)
                 .HasForeignKey(x => x.OrderEntityId);
 
-            builder.HasOne<ProductEntity>(x => x.Product);
+            builder
+                .HasOne<ProductEntity>(x => x.Product)
+                .WithMany()
+                .HasForeignKey(x => x.ProductEntityId);
         }
     }
 }

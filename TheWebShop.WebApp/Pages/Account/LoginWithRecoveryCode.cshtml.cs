@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account
@@ -16,9 +16,9 @@ namespace TheWebShop.WebApp.Pages.Account
     public class LoginWithRecoveryCodeModel : PageModel
     {
         private readonly SignInManager<UserEntity> _signInManager;
-        private readonly ILogger<LoginWithRecoveryCodeModel> _logger;
+        private readonly ILogger _logger;
 
-        public LoginWithRecoveryCodeModel(SignInManager<UserEntity> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
+        public LoginWithRecoveryCodeModel(SignInManager<UserEntity> signInManager, ILogger logger)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -71,17 +71,17 @@ namespace TheWebShop.WebApp.Pages.Account
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);
+                _logger.Information("User with ID '{UserId}' logged in with a recovery code.", user.Id);
                 return LocalRedirect(returnUrl ?? Url.Content("~/"));
             }
             if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
+                _logger.Warning("User with ID '{UserId}' account locked out.", user.Id);
                 return RedirectToPage("./Lockout");
             }
             else
             {
-                _logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
+                _logger.Warning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
                 ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
                 return Page();
             }

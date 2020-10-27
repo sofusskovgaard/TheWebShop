@@ -25,13 +25,16 @@ using TheWebShop.Services.BasketService;
 using TheWebShop.Services.CachingServices;
 using TheWebShop.Services.DataAccessServices.Brand;
 using TheWebShop.Services.DataAccessServices.Category;
+using TheWebShop.Services.DataAccessServices.Order;
 using TheWebShop.Services.DataAccessServices.Product;
 using TheWebShop.Services.DataAccessServices.Review;
 using TheWebShop.Services.EmailService;
 using TheWebShop.Services.EntityServices.BrandService;
 using TheWebShop.Services.EntityServices.CategoryService;
+using TheWebShop.Services.EntityServices.OrderService;
 using TheWebShop.Services.EntityServices.ProductService;
 using TheWebShop.Services.EntityServices.ReviewService;
+using TheWebShop.Services.OrderingService;
 
 namespace TheWebShop.WebApp
 {
@@ -82,16 +85,20 @@ namespace TheWebShop.WebApp
             services.AddScoped<ICategoryDataAccessService, CategoryDataAccessService>();
             services.AddScoped<IBrandDataAccessService, BrandDataAccessService>();
             services.AddScoped<IReviewDataAccessService, ReviewDataAccessService>();
+            services.AddScoped<IOrderDataAccessService, OrderDataAccessService>();
 
             // Configure entity services
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IReviewService, ReviewService>();
-            
+            services.AddScoped<IOrderService, OrderService>();
+
             // Other services
             services.AddScoped<IEmailSender, EmailService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IOrderingService, OrderingService>();
 
             // Razor Pages
             services.AddRazorPages(options =>

@@ -18,6 +18,6 @@ namespace TheWebShop.Data.Entities.Order
         
         public decimal TotalTax { get; set; }
         
-        public ICollection<OrderItemEntity> Items { get; set; }
+        public ICollection<OrderItemEntity> Items { get; set; } = new List<OrderItemEntity>();
     }
 }

@@ -6,7 +6,7 @@ namespace TheWebShop.Common.Dtos
         
         public OrderDto Order { get; set; }
 
-        public int ProductItemEntity { get; set; }
+        public int ProductEntityId { get; set; }
         
         public ProductDto Product { get; set; }
         

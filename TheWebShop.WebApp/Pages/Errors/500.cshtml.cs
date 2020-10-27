@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace TheWebShop.WebApp.Pages
 {
@@ -16,9 +16,9 @@ namespace TheWebShop.WebApp.Pages
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
-        private readonly ILogger<ServerErrorModel> _logger;
+        private readonly ILogger _logger;
 
-        public ServerErrorModel(ILogger<ServerErrorModel> logger)
+        public ServerErrorModel(ILogger logger)
         {
             _logger = logger;
         }

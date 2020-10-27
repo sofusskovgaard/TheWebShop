@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account
@@ -16,9 +16,9 @@ namespace TheWebShop.WebApp.Pages.Account
     public class LoginWith2faModel : PageModel
     {
         private readonly SignInManager<UserEntity> _signInManager;
-        private readonly ILogger<LoginWith2faModel> _logger;
+        private readonly ILogger _logger;
 
-        public LoginWith2faModel(SignInManager<UserEntity> signInManager, ILogger<LoginWith2faModel> logger)
+        public LoginWith2faModel(SignInManager<UserEntity> signInManager, ILogger logger)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -80,17 +80,17 @@ namespace TheWebShop.WebApp.Pages.Account
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);
+                _logger.Information("User with ID '{UserId}' logged in with 2fa.", user.Id);
                 return LocalRedirect(returnUrl);
             }
             else if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
+                _logger.Warning("User with ID '{UserId}' account locked out.", user.Id);
                 return RedirectToPage("./Lockout");
             }
             else
             {
-                _logger.LogWarning("Invalid authenticator code entered for user with ID '{UserId}'.", user.Id);
+                _logger.Warning("Invalid authenticator code entered for user with ID '{UserId}'.", user.Id);
                 ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
                 return Page();
             }

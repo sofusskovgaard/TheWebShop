@@ -11,7 +11,10 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label asp-for="@Model.FormModel.Name"></label>
-                <input type="text" class="form-control" asp-for="@Model.FormModel.Name"/>
+                <input type="text" class="form-control" asp-for="@Model.FormModel.Name" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Name)
+                </small>
             </div>
         </div>
     </div>
@@ -20,19 +23,28 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="@Model.FormModel.Website"></label>
-                <input type="text" class="form-control" asp-for="@Model.FormModel.Website"/>
+                <input type="text" class="form-control" asp-for="@Model.FormModel.Website" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Website)
+                </small>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="@Model.FormModel.Email"></label>
-                <input type="text" class="form-control" asp-for="@Model.FormModel.Email"/>
+                <input type="text" class="form-control" asp-for="@Model.FormModel.Email" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Email)
+                </small>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="@Model.FormModel.PhoneNumber"></label>
-                <input type="text" class="form-control" asp-for="@Model.FormModel.PhoneNumber"/>
+                <input type="text" class="form-control" asp-for="@Model.FormModel.PhoneNumber" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.PhoneNumber)
+                </small>
             </div>
         </div>
     </div>
@@ -46,6 +58,9 @@
                         Active
                     </label>
                     <small class="d-block text-muted">Should this product be shown throughout the website?</small>
+                    <small class="d-block text-danger">
+                        @Html.ValidationMessageFor(x => x.FormModel.Active)
+                    </small>
                 </div>
             </div>
         </div>

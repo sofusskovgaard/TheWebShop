@@ -1,21 +1,20 @@
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace TheWebShop.Services.EmailService
 {
     public class EmailService : IEmailService
     {
-        private readonly ILogger<EmailService> _logger;
+        private readonly ILogger _logger;
 
-        public EmailService(ILogger<EmailService> logger)
+        public EmailService(ILogger logger)
         {
             _logger = logger;
         }
         
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            await Task.Run(() => _logger.LogInformation("Email: {0}\nSubject: {1}\nMessage: {3}", email, subject, htmlMessage));
+            await Task.Run(() => _logger.Information("Email: {0}\nSubject: {1}\nMessage: {2}", email, subject, htmlMessage));
         }
     }
 }

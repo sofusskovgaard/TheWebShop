@@ -9,7 +9,7 @@ namespace TheWebShop.Data.Entities.OrderItem
         
         OrderEntity Order { get; set; }
         
-        int ProductItemEntity { get; set; }
+        int ProductEntityId { get; set; }
         
         ProductEntity Product { get; set; }
         

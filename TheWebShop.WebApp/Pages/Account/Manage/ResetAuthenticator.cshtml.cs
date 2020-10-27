@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account.Manage
@@ -14,12 +14,12 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
     {
         UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
-        ILogger<ResetAuthenticatorModel> _logger;
+        ILogger _logger;
 
         public ResetAuthenticatorModel(
             UserManager<UserEntity> userManager,
             SignInManager<UserEntity> signInManager,
-            ILogger<ResetAuthenticatorModel> logger)
+            ILogger logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -50,7 +50,7 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
 
             await _userManager.SetTwoFactorEnabledAsync(user, false);
             await _userManager.ResetAuthenticatorKeyAsync(user);
-            _logger.LogInformation("User with ID '{UserId}' has reset their authentication app key.", user.Id);
+            _logger.Information("User with ID '{UserId}' has reset their authentication app key.", user.Id);
             
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your authenticator app key has been reset, you will need to configure your authenticator app using the new key.";

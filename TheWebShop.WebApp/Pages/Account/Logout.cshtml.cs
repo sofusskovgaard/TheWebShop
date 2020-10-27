@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account
@@ -15,9 +15,9 @@ namespace TheWebShop.WebApp.Pages.Account
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<UserEntity> _signInManager;
-        private readonly ILogger<LogoutModel> _logger;
+        private readonly ILogger _logger;
 
-        public LogoutModel(SignInManager<UserEntity> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<UserEntity> signInManager, ILogger logger)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -30,7 +30,7 @@ namespace TheWebShop.WebApp.Pages.Account
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
+            _logger.Information("User logged out.");
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);

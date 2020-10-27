@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account.Manage
@@ -13,12 +13,12 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
     {
         private readonly UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
-        private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly ILogger _logger;
 
         public DeletePersonalDataModel(
             UserManager<UserEntity> userManager,
             SignInManager<UserEntity> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -76,7 +76,7 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
 
             await _signInManager.SignOutAsync();
 
-            _logger.LogInformation("User with ID '{UserId}' deleted themselves.", userId);
+            _logger.Information("User with ID '{UserId}' deleted themselves.", userId);
 
             return Redirect("~/");
         }

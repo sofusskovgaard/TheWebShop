@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using TheWebShop.Common.Dtos;
 using TheWebShop.Common.Filters.Product;
-using TheWebShop.Common.Models.Components;
 using TheWebShop.Services.EntityServices.ProductService;
 
 namespace TheWebShop.WebApp.Pages

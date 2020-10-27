@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account.Manage
@@ -10,11 +10,11 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
     public class PersonalDataModel : PageModel
     {
         private readonly UserManager<UserEntity> _userManager;
-        private readonly ILogger<PersonalDataModel> _logger;
+        private readonly ILogger _logger;
 
         public PersonalDataModel(
             UserManager<UserEntity> userManager,
-            ILogger<PersonalDataModel> logger)
+            ILogger logger)
         {
             _userManager = userManager;
             _logger = logger;

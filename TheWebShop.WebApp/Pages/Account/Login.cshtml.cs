@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+
+using Serilog;
+
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account
@@ -20,10 +22,10 @@ namespace TheWebShop.WebApp.Pages.Account
     {
         private readonly UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly ILogger _logger;
 
         public LoginModel(SignInManager<UserEntity> signInManager, 
-            ILogger<LoginModel> logger,
+            ILogger logger,
             UserManager<UserEntity> userManager)
         {
             _userManager = userManager;
@@ -83,7 +85,7 @@ namespace TheWebShop.WebApp.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.Information("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -92,7 +94,7 @@ namespace TheWebShop.WebApp.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.Warning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
                 else

@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +26,7 @@ namespace TheWebShop.WebApp.Pages.Products
 
         public ProductDetailedDto Product { get; set; }
 
+        [Range(1, Double.MaxValue, ErrorMessage = "Quantity should be higher than 0")]
         [BindProperty(SupportsGet = true)]
         public int Quantity { get; set; } = 1;
 
@@ -43,6 +46,13 @@ namespace TheWebShop.WebApp.Pages.Products
 
         public async Task<IActionResult> OnPostAsync([FromRoute] int entityId)
         {
+            if (!ModelState.IsValid)
+            {
+                Product = await _productService.GetById<ProductDetailedDto>(entityId);
+
+                return Page();
+            }
+
             Product = await _productService.GetById<ProductDetailedDto>(entityId);
             await _basketService.AddToBasket(HttpContext, Product, Quantity);
 

@@ -10,14 +10,20 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="@Model.FormModel.Title"></label>
-                <input type="text" class="form-control" asp-for="@Model.FormModel.Title"/>
+                <input type="text" class="form-control" asp-for="@Model.FormModel.Title" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Title)
+                </small>
             </div>
         </div>
 
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="@Model.FormModel.Rating"></label>
-                <input type="number" class="form-control" asp-for="@Model.FormModel.Rating"/>
+                <input type="number" class="form-control" asp-for="@Model.FormModel.Rating" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Rating)
+                </small>
             </div>
         </div>
         
@@ -26,6 +32,9 @@
                 <label>Product</label>
                 <select type="text" class="form-control" asp-for="@Model.FormModel.ProductEntityId" asp-items="@Model.Products">
                 </select>
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.ProductEntityId)
+                </small>
             </div>
         </div>
     </div>
@@ -36,6 +45,9 @@
             <div class="form-group">
                 <label asp-for="@Model.FormModel.Comment"></label>
                 <textarea class="form-control" rows="3" asp-for="@Model.FormModel.Comment"></textarea>
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Comment)
+                </small>
             </div>
         </div>
         
@@ -50,6 +62,9 @@
                         Active
                     </label>
                     <small class="d-block text-muted">Should this review be shown throughout the website?</small>
+                    <small class="d-block text-danger">
+                        @Html.ValidationMessageFor(x => x.FormModel.Active)
+                    </small>
                 </div>
             </div>
         </div>

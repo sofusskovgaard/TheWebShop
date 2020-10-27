@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account.Manage
@@ -13,11 +13,11 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
     public class Disable2faModel : PageModel
     {
         private readonly UserManager<UserEntity> _userManager;
-        private readonly ILogger<Disable2faModel> _logger;
+        private readonly ILogger _logger;
 
         public Disable2faModel(
             UserManager<UserEntity> userManager,
-            ILogger<Disable2faModel> logger)
+            ILogger logger)
         {
             _userManager = userManager;
             _logger = logger;
@@ -56,7 +56,7 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
                 throw new InvalidOperationException($"Unexpected error occurred disabling 2FA for user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            _logger.LogInformation("User with ID '{UserId}' has disabled 2fa.", _userManager.GetUserId(User));
+            _logger.Information("User with ID '{UserId}' has disabled 2fa.", _userManager.GetUserId(User));
             StatusMessage = "2fa has been disabled. You can reenable 2fa when you setup an authenticator app";
             return RedirectToPage("./TwoFactorAuthentication");
         }

@@ -46,6 +46,9 @@
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" multiple asp-for="@Model.Pictures">
                         <label class="custom-file-label" asp-for="@Model.Pictures" aria-describedby="Pictures">Choose file</label>
+                        <small class="text-danger">
+                            @Html.ValidationMessageFor(x => x.Pictures)
+                        </small>
                     </div>
                 </div>
             </div>
@@ -57,7 +60,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label asp-for="@Model.Product.EntityId"></label>
-                <input type="text" class="form-control" readonly asp-for="@Model.Product.EntityId"/>
+                <input type="text" class="form-control" readonly asp-for="@Model.Product.EntityId" />
             </div>
         </div>
     </div>
@@ -66,7 +69,10 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="@Model.Product.Name"></label>
-                <input type="text" class="form-control" asp-for="@Model.FormModel.Name"/>
+                <input type="text" class="form-control" asp-for="@Model.FormModel.Name" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Name)
+                </small>
             </div>
         </div>
         <div class="col-md-4">
@@ -75,18 +81,27 @@
                 <select class="custom-select" asp-for="@Model.FormModel.BrandEntityId" asp-items="@Model.Brands">
                     <option value="@null" selected>None</option>
                 </select>
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.BrandEntityId)
+                </small>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="@Model.Product.Price"></label>
-                <input type="text" class="form-control" asp-for="@Model.FormModel.Price"/>
+                <input type="text" class="form-control" asp-for="@Model.FormModel.Price" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Price)
+                </small>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="@Model.Product.Stock"></label>
-                <input type="number" class="form-control" asp-for="@Model.FormModel.Stock"/>
+                <input type="number" class="form-control" asp-for="@Model.FormModel.Stock" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Stock)
+                </small>
             </div>
         </div>
     </div>
@@ -96,6 +111,9 @@
             <div class="form-group">
                 <label asp-for="@Model.Product.Description"></label>
                 <textarea class="form-control" rows="8" asp-for="@Model.FormModel.Description"></textarea>
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Description)
+                </small>
             </div>
         </div>
     </div>
@@ -109,6 +127,9 @@
                         Active
                     </label>
                     <small class="d-block text-muted">Should this product be shown throughout the website?</small>
+                    <small class="d-block text-danger">
+                        @Html.ValidationMessageFor(x => x.FormModel.Active)
+                    </small>
                 </div>
             </div>
         </div>
@@ -121,6 +142,9 @@
                         Highlight
                     </label>
                     <small class="d-block text-muted">Should this product be highlighted?</small>
+                    <small class="d-block text-danger">
+                        @Html.ValidationMessageFor(x => x.FormModel.Highlight)
+                    </small>
                 </div>
             </div>
         </div>

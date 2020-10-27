@@ -1,15 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.IO;
-using System.Linq;
+
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using TheWebShop.Data.Entities;
 using TheWebShop.Data.Entities.Brand;
 using TheWebShop.Data.Entities.Category;

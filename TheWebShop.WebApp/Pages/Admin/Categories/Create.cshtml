@@ -10,7 +10,10 @@
         <div class="col-md-8">
             <div class="form-group">
                 <label asp-for="@Model.FormModel.Name"></label>
-                <input type="text" class="form-control" asp-for="@Model.FormModel.Name"/>
+                <input type="text" class="form-control" asp-for="@Model.FormModel.Name" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Name)
+                </small>
             </div>
         </div>
 
@@ -20,6 +23,9 @@
                 <select class="custom-select" asp-for="@Model.FormModel.ParentCategoryEntityId" asp-items="@Model.Categories">
                     <option value="@null" selected>None</option>
                 </select>
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.ParentCategoryEntityId)
+                </small>
             </div>
         </div>
     </div>
@@ -29,6 +35,9 @@
             <div class="form-group">
                 <label asp-for="@Model.FormModel.Description"></label>
                 <textarea class="form-control" rows="3" asp-for="@Model.FormModel.Description"></textarea>
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(x => x.FormModel.Description)
+                </small>
             </div>
         </div>
     </div>
@@ -42,6 +51,9 @@
                         Active
                     </label>
                     <small class="d-block text-muted">Should this category be shown throughout the website?</small>
+                    <small class="d-block text-danger">
+                        @Html.ValidationMessageFor(x => x.FormModel.Active)
+                    </small>
                 </div>
             </div>
         </div>

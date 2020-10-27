@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account.Manage
@@ -13,11 +13,11 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
     public class GenerateRecoveryCodesModel : PageModel
     {
         private readonly UserManager<UserEntity> _userManager;
-        private readonly ILogger<GenerateRecoveryCodesModel> _logger;
+        private readonly ILogger _logger;
 
         public GenerateRecoveryCodesModel(
             UserManager<UserEntity> userManager,
-            ILogger<GenerateRecoveryCodesModel> logger)
+            ILogger logger)
         {
             _userManager = userManager;
             _logger = logger;
@@ -65,7 +65,7 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
             var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
             RecoveryCodes = recoveryCodes.ToArray();
 
-            _logger.LogInformation("User with ID '{UserId}' has generated new 2FA recovery codes.", userId);
+            _logger.Information("User with ID '{UserId}' has generated new 2FA recovery codes.", userId);
             StatusMessage = "You have generated new recovery codes.";
             return RedirectToPage("./ShowRecoveryCodes");
         }

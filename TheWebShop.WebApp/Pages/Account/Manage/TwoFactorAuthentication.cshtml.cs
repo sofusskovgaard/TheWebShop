@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using TheWebShop.Data.Entities.User;
 
 namespace TheWebShop.WebApp.Pages.Account.Manage
@@ -16,12 +16,12 @@ namespace TheWebShop.WebApp.Pages.Account.Manage
 
         private readonly UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
-        private readonly ILogger<TwoFactorAuthenticationModel> _logger;
+        private readonly ILogger _logger;
 
         public TwoFactorAuthenticationModel(
             UserManager<UserEntity> userManager,
             SignInManager<UserEntity> signInManager,
-            ILogger<TwoFactorAuthenticationModel> logger)
+            ILogger logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -63,13 +63,16 @@
 
             </a>
 
-            <form method="post" class="d-flex align-items-center mt-5 mb-3">
+            <form method="post" class="d-flex align-items-start mt-5 mb-3">
 
                 @if (Model.Product.InStock)
                 {
-                    <div class="form-group mb-0 mr-2">
-                        <input type="number" asp-for="@Model.Quantity" class="form-control"/>
-                    </div>
+                <div class="form-group mb-0 mr-2">
+                    <input type="number" asp-for="@Model.Quantity" class="form-control" />
+                    <small class="text-danger">
+                        @Html.ValidationMessageFor(x => x.Quantity)
+                    </small>
+                </div>
 
                     <button class="btn btn-dark btn-block m-0">
                         Add to basket

@@ -8,7 +8,7 @@ using TheWebShop.Data.Entities.Order;
 
 namespace TheWebShop.Services.DataAccessServices.Order
 {
-    public class OrderDataAccessService : BaseDataAccessService<OrderEntity, OrderFilter, OrderOrderBy>
+    public class OrderDataAccessService : BaseDataAccessService<OrderEntity, OrderFilter, OrderOrderBy>, IOrderDataAccessService
     {
         private readonly DatabaseContext _context;
 
@@ -24,6 +24,7 @@ namespace TheWebShop.Services.DataAccessServices.Order
                 .Include(x => x.Customer)
                 .Include(x => x.Items)
                     .ThenInclude(x => x.Product)
+                        .ThenInclude(x => x.Brand)
                 .FirstOrDefaultAsync(x => x.EntityId == entityId);
 
             return order;
