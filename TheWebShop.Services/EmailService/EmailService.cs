@@ -12,7 +12,7 @@ namespace TheWebShop.Services.EmailService
         private readonly ILogger _logger;
         
         private const string senderMail = "no-reply@mysuperduperlongdomainformysuperduperawesomeschoolproject.com";
-        private const string apiKey = "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";
+        private const string apiKey = "";
 
         public EmailService(ILogger logger)
         {
@@ -21,12 +21,12 @@ namespace TheWebShop.Services.EmailService
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress(senderMail, "no-reply");
-            var to = new EmailAddress(email);
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlMessage, htmlMessage);
-            
-            await client.SendEmailAsync(msg);
+//            var client = new SendGridClient(apiKey);
+//            var from = new EmailAddress(senderMail, "no-reply");
+//            var to = new EmailAddress(email);
+//            var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlMessage, htmlMessage);
+//            
+//            await client.SendEmailAsync(msg);
             
             _logger.Information("Sent an email to \"{0}\" with the subject of \"{1}\" and an htmlMessage of \"{2}\"", email, subject, htmlMessage);
         }
