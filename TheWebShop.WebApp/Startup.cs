@@ -73,12 +73,12 @@ namespace TheWebShop.WebApp
             services.AddScoped<ICachingService, CachingService>();
 
             // MiniProfiler
-            services.AddMiniProfiler(options =>
-            {
-                options.SqlFormatter = new StackExchange.Profiling.SqlFormatters.VerboseSqlServerFormatter();
-                options.EnableMvcFilterProfiling = true;
-                options.EnableMvcViewProfiling = true;
-            }).AddEntityFramework();
+//            services.AddMiniProfiler(options =>
+//            {
+//                options.SqlFormatter = new StackExchange.Profiling.SqlFormatters.VerboseSqlServerFormatter();
+//                options.EnableMvcFilterProfiling = true;
+//                options.EnableMvcViewProfiling = true;
+//            }).AddEntityFramework();
 
             // Configure data access services
             services.AddScoped<IProductDataAccessService, ProductDataAccessService>();
@@ -118,20 +118,20 @@ namespace TheWebShop.WebApp
             services.AddControllers();
 
             // Swagger
-            services.AddSwaggerGen();
+//            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Mini Profiler
-            app.UseMiniProfiler();
+//            app.UseMiniProfiler();
             
             // Swagger
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "TheWebShop v1");
-            });
+//            app.UseSwagger();
+//            app.UseSwaggerUI(options =>
+//            {
+//                options.SwaggerEndpoint("/swagger/v1/swagger.json", "TheWebShop v1");
+//            });
 
             if (env.IsDevelopment())
             {
